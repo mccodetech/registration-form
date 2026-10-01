@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>വിലങ്ങംപൊയിൽ മഹല്ല് - സ്ഥിതി വിവര കണക്ക്</title>
+    <title>Vilangampoyil Mahallu - Sthithi Vivara Kanakku</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font (Manjari for Malayalam) -->
@@ -21,12 +21,12 @@
         <!-- Header Section & Navigation Tabs -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b pb-4 gap-4">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-emerald-900 tracking-wide">വിലങ്ങംപൊയിൽ മഹല്ല്</h1>
-                <p class="text-sm md:text-base font-semibold text-emerald-700 mt-1">മഹല്ല് സ്ഥിതി വിവര കണക്ക്</p>
+                <h1 class="text-2xl md:text-3xl font-bold text-emerald-900 tracking-wide">Vilangampoyil Mahallu</h1>
+                <p class="text-sm md:text-base font-semibold text-emerald-700 mt-1">Mahallu Sthithi Vivara Kanakku</p>
             </div>
             <div class="flex gap-2 bg-emerald-100 p-1 rounded-xl">
-                <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">സർവ്വെ ഫോം</button>
-                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">അഡ്മിൻ ഡാഷ്‌ബോർഡ്</button>
+                <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">Survey Form</button>
+                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">Admin Dashboard</button>
             </div>
         </div>
 
@@ -35,31 +35,31 @@
             <form id="mahalluForm" class="space-y-6">
                 <!-- Basic Details Card -->
                 <div class="bg-emerald-50/60 p-6 rounded-xl border border-emerald-200/60 shadow-sm">
-                    <h2 class="text-md font-bold text-emerald-800 mb-4 flex items-center gap-2">🏠 ഗൃഹ വിവരങ്ങൾ</h2>
+                    <h2 class="text-md font-bold text-emerald-800 mb-4 flex items-center gap-2"> Griha Vivarangal</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">ഗൃഹനാഥൻ്റെ പേര്:</label>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Grihanathante Peru:</label>
                             <input type="text" id="grihanathan" required class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">വീട്ടുപേര്:</label>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Veettuperu:</label>
                             <input type="text" id="veettuperu" required class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">പഞ്ചായത്ത്:</label>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Panchayat:</label>
                             <input type="text" id="panchayat" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">വാർഡ് നമ്പർ:</label>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Ward Number:</label>
                             <input type="text" id="wardNo" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">വീട് നമ്പർ:</label>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">House Number:</label>
                             <input type="text" id="houseNo" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">മഹല്ല്:</label>
-                            <input type="text" id="mahallu" value="വിലങ്ങംപൊയിൽ മഹല്ല്" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Mahallu:</label>
+                            <input type="text" id="mahallu" value="Vilangampoyil Mahallu" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
                         </div>
                     </div>
                 </div>
@@ -67,32 +67,32 @@
                 <!-- Members Section -->
                 <div>
                     <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">👥 അംഗങ്ങളുടെ വിവരങ്ങൾ</h3>
-                        <button type="button" onclick="addRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition">+ അംഗത്തെ ചേർക്കുക</button>
+                        <h3 class="text-lg font-bold text-gray-800"> Angangalude Vivarangal</h3>
+                        <button type="button" onclick="addRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition">+ Angathe Cherkkuka</button>
                     </div>
 
                     <div id="memberRows" class="space-y-4">
                         <!-- Default Member Card -->
                         <div class="member-card bg-gray-50/80 p-5 rounded-xl border border-gray-200 shadow-sm relative">
                             <div class="flex justify-between items-center mb-3 border-b pb-2">
-                                <span class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-full">അംഗം #<span class="sr-no">1</span></span>
-                                <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700 text-xs font-bold bg-red-50 px-2.5 py-1 rounded-lg">ഒഴിവാക്കുക X</button>
+                                <span class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-full">Angam #<span class="sr-no">1</span></span>
+                                <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700 text-xs font-bold bg-red-50 px-2.5 py-1 rounded-lg">Ozhivakkuka X</button>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">പേരും വീട്ടുപേരും:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg name" required></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ഫോൺ നമ്പർ:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg phone"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ഗൃഹനാഥനുമായുള്ള ബന്ധം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg relation"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ജനന തീയ്യതി:</label><input type="date" class="w-full bg-white border border-gray-300 p-2 rounded-lg dob"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ജോലി:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg job"></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Perum Veettuperum:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg name" required></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Phone Number:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg phone"></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Bandham:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg relation"></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Theeyathi:</label><input type="date" class="w-full bg-white border border-gray-300 p-2 rounded-lg dob"></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Joli:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg job"></div>
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-600 mb-1">സ്വദേശത്തോ വിദേശത്തോ:</label>
-                                    <select class="w-full bg-white border border-gray-300 p-2 rounded-lg location"><option value="സ്വദേശം">സ്വദേശം</option><option value="വിദേശം">വിദേശം</option></select>
+                                    <label class="block text-xs font-bold text-gray-600 mb-1">Swadesham/Videsham:</label>
+                                    <select class="w-full bg-white border border-gray-300 p-2 rounded-lg location"><option value="Swadesham">Swadesham</option><option value="Videsham">Videsham</option></select>
                                 </div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">മതം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg religion" value="ഇസ്ലാം"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">വിദ്യാഭ്യാസ യോഗ്യത:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg education"></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Matham:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg religion" value="Islam"></div>
+                                <div><label class="block text-xs font-bold text-gray-600 mb-1">Vidyabhyasa Yogyatha:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg education"></div>
                                 <div>
-                                    <label class="block text-xs font-bold text-gray-600 mb-1">വൈവാഹിക സ്ഥിതി:</label>
-                                    <select class="w-full bg-white border border-gray-300 p-2 rounded-lg marital"><option value="അവിവാഹിതം">അവിവാഹിതം</option><option value="വിവാഹിതം">വിവാഹിതം</option></select>
+                                    <label class="block text-xs font-bold text-gray-600 mb-1">Vaivahika Sthithi:</label>
+                                    <select class="w-full bg-white border border-gray-300 p-2 rounded-lg marital"><option value="Unmarried">Unmarried</option><option value="Married">Married</option></select>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
 
                 <!-- Submit Button -->
                 <div class="text-center pt-6 border-t">
-                    <button type="submit" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition w-full md:w-auto">✨ വിവരങ്ങൾ സേവ് ചെയ്യുക</button>
+                    <button type="submit" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition w-full md:w-auto"> Vivarangal Save Cheyyuka</button>
                 </div>
             </form>
         </div>
@@ -109,8 +109,8 @@
         <!-- 2. ADMIN DASHBOARD SECTION -->
         <div id="sectionAdmin" class="hidden space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-emerald-50 p-4 rounded-xl border">
-                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="🔍 വീട്ടുപേര് അല്ലെങ്കിൽ ഗൃഹനാഥൻ പേര് വെച്ച് തിരയുക..." class="w-full md:w-96 bg-white border border-gray-300 p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
-                <div class="text-sm font-bold text-emerald-900 bg-white px-4 py-2 rounded-lg border shadow-sm">ആകെ കുടുംബങ്ങൾ: <span id="totalCount" class="text-emerald-700">0</span></div>
+                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder=" Veettuperu allengil Grihanathan peru vechu thirayuka..." class="w-full md:w-96 bg-white border border-gray-300 p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
+                <div class="text-sm font-bold text-emerald-900 bg-white px-4 py-2 rounded-lg border shadow-sm">Aake Kudumbangal: <span id="totalCount" class="text-emerald-700">0</span></div>
             </div>
 
             <!-- Table View -->
@@ -118,12 +118,12 @@
                 <table class="min-w-full divide-y divide-gray-200 text-sm" id="adminTable">
                     <thead class="bg-emerald-800 text-white text-xs">
                         <tr>
-                            <th class="px-3 py-3 text-center">നമ്പർ</th>
-                            <th class="px-3 py-3 text-left">ഗൃഹനാഥൻ</th>
-                            <th class="px-3 py-3 text-left">വീട്ടുപേര്</th>
-                            <th class="px-3 py-3 text-center">വാർഡ് / വീട് നಂ</th>
-                            <th class="px-3 py-3 text-center">അംഗങ്ങളുടെ എണ്ണം</th>
-                            <th class="px-3 py-3 text-center">പ്രവർത്തനങ്ങൾ</th>
+                            <th class="px-3 py-3 text-center">Number</th>
+                            <th class="px-3 py-3 text-left">Grihanathan</th>
+                            <th class="px-3 py-3 text-left">Veettuperu</th>
+                            <th class="px-3 py-3 text-center">Ward / House No</th>
+                            <th class="px-3 py-3 text-center">Angangalude Ennam</th>
+                            <th class="px-3 py-3 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-gray-700" id="tableBody">
@@ -135,18 +135,30 @@
 
     </div>
 
+    <!-- CUSTOM APP MODAL / POPUP -->
+    <div id="appModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl text-center transform transition-all scale-95 opacity-0" id="modalContainer">
+            <div id="modalIcon" class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">✨</div>
+            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-2">Notice</h3>
+            <p id="modalMessage" class="text-sm text-gray-600 mb-6">Message text goes here.</p>
+            <div id="modalActions" class="flex justify-center gap-3">
+                <button id="modalPrimaryBtn" onclick="closeAppModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-xl text-sm font-bold shadow transition">OK</button>
+            </div>
+        </div>
+    </div>
+
     <!-- VIEW DETAILS MODAL -->
     <div id="detailModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
             <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-lg font-bold text-emerald-900">കുടുംബത്തിന്റെ പൂർണ്ണ വിവരങ്ങൾ</h3>
-                <button onclick="closeModal()" class="text-red-500 font-bold text-lg px-2">✕</button>
+                <h3 class="text-lg font-bold text-emerald-900">Kudumbathinte Poorna Vivarangal</h3>
+                <button onclick="closeDetailModal()" class="text-red-500 font-bold text-lg px-2">✕</button>
             </div>
             <div id="modalContent" class="space-y-4 text-sm">
                 <!-- Details injected here -->
             </div>
             <div class="text-right mt-6 pt-3 border-t">
-                <button onclick="closeModal()" class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-bold">അടയ്ക്കുക</button>
+                <button onclick="closeDetailModal()" class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-bold">Adaykkuka</button>
             </div>
         </div>
     </div>
@@ -167,6 +179,46 @@
         const database = firebase.database();
 
         let allSurveysData = {};
+
+        // Custom App Popup Function
+        function showAppModal(title, message, isConfirm = false, onConfirm = null) {
+            const modal = document.getElementById('appModal');
+            const container = document.getElementById('modalContainer');
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalMessage').innerText = message;
+            
+            const actionsDiv = document.getElementById('modalActions');
+            if (isConfirm) {
+                actionsDiv.innerHTML = `
+                    <button id="modalCancelBtn" onclick="closeAppModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-xl text-sm font-bold transition">Illa</button>
+                    <button id="modalConfirmBtn" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition">Athe</button>
+                `;
+                document.getElementById('modalConfirmBtn').onclick = function() {
+                    closeAppModal();
+                    if(onConfirm) onConfirm();
+                };
+            } else {
+                actionsDiv.innerHTML = `<button onclick="closeAppModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-xl text-sm font-bold shadow transition">OK</button>`;
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => {
+                container.classList.remove('scale-95', 'opacity-0');
+                container.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeAppModal() {
+            const modal = document.getElementById('appModal');
+            const container = document.getElementById('modalContainer');
+            container.classList.remove('scale-100', 'opacity-100');
+            container.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 150);
+        }
 
         // Tab Switching Logic
         function switchTab(tab) {
@@ -203,24 +255,24 @@
             newCard.className = 'member-card bg-gray-50/80 p-5 rounded-xl border border-gray-200 shadow-sm relative';
             newCard.innerHTML = `
                 <div class="flex justify-between items-center mb-3 border-b pb-2">
-                    <span class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-full">അംഗം #<span class="sr-no">${cardCount}</span></span>
-                    <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700 text-xs font-bold bg-red-50 px-2.5 py-1 rounded-lg">ഒഴിവാക്കുക X</button>
+                    <span class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-full">Angam #<span class="sr-no">${cardCount}</span></span>
+                    <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700 text-xs font-bold bg-red-50 px-2.5 py-1 rounded-lg">Ozhivakkuka X</button>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">പേരും വീട്ടുപേരും:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg name" required></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ഫോൺ നമ്പർ:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg phone"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ഗൃഹനാഥനുമായുള്ള ബന്ധം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg relation"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ജനന തീയ്യതി:</label><input type="date" class="w-full bg-white border border-gray-300 p-2 rounded-lg dob"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ജോലി:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg job"></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Perum Veettuperum:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg name" required></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Phone Number:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg phone"></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Bandham:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg relation"></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Theeyathi:</label><input type="date" class="w-full bg-white border border-gray-300 p-2 rounded-lg dob"></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Joli:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg job"></div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">സ്വദേശത്തോ വിദേശത്തോ:</label>
-                        <select class="w-full bg-white border border-gray-300 p-2 rounded-lg location"><option value="സ്വദേശം">സ്വദേശം</option><option value="വിദേശം">വിദേശം</option></select>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Swadesham/Videsham:</label>
+                        <select class="w-full bg-white border border-gray-300 p-2 rounded-lg location"><option value="Swadesham">Swadesham</option><option value="Videsham">Videsham</option></select>
                     </div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">മതം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg religion" value="ഇസ്ലാം"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">വിദ്യാഭ്യാസ യോഗ്യത:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg education"></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Matham:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg religion" value="Islam"></div>
+                    <div><label class="block text-xs font-bold text-gray-600 mb-1">Vidyabhyasa Yogyatha:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg education"></div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">വൈവാഹിക സ്ഥിതി:</label>
-                        <select class="w-full bg-white border border-gray-300 p-2 rounded-lg marital"><option value="അവിവാഹിതം">അവിവാഹിതം</option><option value="വിവാഹിതം">വിവാഹിതം</option></select>
+                        <label class="block text-xs font-bold text-gray-600 mb-1">Vaivahika Sthithi:</label>
+                        <select class="w-full bg-white border border-gray-300 p-2 rounded-lg marital"><option value="Unmarried">Unmarried</option><option value="Married">Married</option></select>
                     </div>
                 </div>
             `;
@@ -235,7 +287,7 @@
                 card.remove();
                 updateSerialNumbers();
             } else {
-                alert('കുറഞ്ഞത് ഒരു അംഗത്തിന്റെ വിവരമെങ്കിലും ഉണ്ടായിരിക്കണം!');
+                showAppModal('Sradhikkuka', 'Kuranjathu oru angathinte vivaramengilum undayirikkanam!');
             }
         }
 
@@ -269,12 +321,12 @@
 
             database.ref('mahallu_surveys/' + Date.now()).set(formData)
                 .then(() => {
-                    alert('വിവരങ്ങൾ വിജയകരമായി സേവ് ചെയ്തു!');
+                    showAppModal('Vijayam', 'Vivarangal vijayakaramayi save cheythu!');
                     document.getElementById('mahalluForm').reset();
                     document.getElementById('memberRows').innerHTML = '';
                     addRow();
                 })
-                .catch((error) => alert('പിശക്: ' + error.message));
+                .catch((error) => showAppModal('Pishak', 'Error: ' + error.message));
         });
 
         // Load Admin Data from Firebase
@@ -289,7 +341,7 @@
                 document.getElementById('totalCount').innerText = keys.length;
 
                 if(keys.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-500">ഡാറ്റ ഒന്നും ലഭ്യമല്ല</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-500">Data onnum labhyamalla</td></tr>`;
                     return;
                 }
 
@@ -301,11 +353,11 @@
                         <td class="px-3 py-3 text-center font-bold">${index + 1}</td>
                         <td class="px-3 py-3 font-semibold text-emerald-900">${item.grihanathan}</td>
                         <td class="px-3 py-3">${item.veettuperu}</td>
-                        <td class="px-3 py-3 text-center">വാർഡ്: ${item.wardNo || '-'} / വീട്: ${item.houseNo || '-'}</td>
-                        <td class="px-3 py-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">${item.members ? item.members.length : 0} പേർ</span></td>
+                        <td class="px-3 py-3 text-center">Ward: ${item.wardNo || '-'} / House: ${item.houseNo || '-'}</td>
+                        <td class="px-3 py-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">${item.members ? item.members.length : 0} Per</span></td>
                         <td class="px-3 py-3 text-center space-x-2">
-                            <button onclick="viewDetails('${key}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-bold">വിവരങ്ങൾ</button>
-                            <button onclick="deleteRecord('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">ഡിലീറ്റ്</button>
+                            <button onclick="viewDetails('${key}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-bold">Vivaram</button>
+                            <button onclick="confirmDelete('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">Delete</button>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -320,11 +372,11 @@
 
             let html = `
                 <div class="bg-emerald-50 p-4 rounded-xl border mb-4">
-                    <p><strong>ഗൃഹനാഥൻ:</strong> ${item.grihanathan}</p>
-                    <p><strong>വീട്ടുപേര്:</strong> ${item.veettuperu}</p>
-                    <p><strong>പഞ്ചായത്ത് / വാർഡ് / വീട് നമ്പർ:</strong> ${item.panchayat || '-'} / ${item.wardNo || '-'} / ${item.houseNo || '-'}</p>
+                    <p><strong>Grihanathan:</strong> ${item.grihanathan}</p>
+                    <p><strong>Veettuperu:</strong> ${item.veettuperu}</p>
+                    <p><strong>Panchayat / Ward / House No:</strong> ${item.panchayat || '-'} / ${item.wardNo || '-'} / ${item.houseNo || '-'}</p>
                 </div>
-                <h4 class="font-bold text-gray-800 mb-2">കുടുംബാംഗങ്ങളുടെ പട്ടിക:</h4>
+                <h4 class="font-bold text-gray-800 mb-2">Kudumbamangalude Pattika:</h4>
                 <div class="space-y-3">
             `;
 
@@ -332,14 +384,14 @@
                 item.members.forEach((m, idx) => {
                     html += `
                         <div class="bg-gray-50 p-3 rounded-lg border text-xs space-y-1">
-                            <p class="font-bold text-emerald-800">അംഗം #${idx + 1}: ${m.name}</p>
-                            <p>ബന്ധം: ${m.relation || '-'} | ഫോൺ: ${m.phone || '-'} | ജനന തീയ്യതി: ${m.dob || '-'}</p>
-                            <p>ജോലി: ${m.job || '-'} (${m.location || '-'}) | വിദ്യാഭ്യാസം: ${m.education || '-'} | വൈവാഹിക സ്ഥിതി: ${m.marital || '-'}</p>
+                            <p class="font-bold text-emerald-800">Angam #${idx + 1}: ${m.name}</p>
+                            <p>Bandham: ${m.relation || '-'} | Phone: ${m.phone || '-'} | Theeyathi: ${m.dob || '-'}</p>
+                            <p>Joli: ${m.job || '-'} (${m.location || '-'}) | Vidyabhyasam: ${m.education || '-'} | Vaivahika Sthithi: ${m.marital || '-'}</p>
                         </div>
                     `;
                 });
             } else {
-                html += `<p class="text-gray-500 text-xs">അംഗങ്ങളുടെ വിവരങ്ങൾ ലഭ്യമല്ല.</p>`;
+                html += `<p class="text-gray-500 text-xs">Angangalude vivarangal labhyamalla.</p>`;
             }
 
             html += `</div>`;
@@ -348,18 +400,18 @@
             document.getElementById('detailModal').classList.add('flex');
         }
 
-        function closeModal() {
+        function closeDetailModal() {
             document.getElementById('detailModal').classList.remove('flex');
             document.getElementById('detailModal').classList.add('hidden');
         }
 
-        // Delete Record
-        function deleteRecord(key) {
-            if(confirm('തീർച്ചയായും ഈ വിവരങ്ങൾ ഡിലീറ്റ് ചെയ്യണമെന്നുണ്ടോ?')) {
+        // Delete Confirmation with Custom Modal
+        function confirmDelete(key) {
+            showAppModal('Urappanuvo?', 'Ee vivarangal theerchayayum delete cheyyanamennundo?', true, function() {
                 database.ref('mahallu_surveys/' + key).remove()
-                    .then(() => alert('വിജയകരമായി ഡിലീറ്റ് ചെയ്തു!'))
-                    .catch(err => alert('പിശക്: ' + err.message));
-            }
+                    .then(() => showAppModal('Vijayam', 'Vijayakaramayi delete cheythu!'))
+                    .catch(err => showAppModal('Pishak', 'Error: ' + err.message));
+            });
         }
 
         // Search/Filter Function
