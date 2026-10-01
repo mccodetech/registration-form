@@ -6,8 +6,9 @@
     <title>വിലങ്ങംപൊയിൽ മഹല്ല് - സ്ഥിതി വിവര കണക്ക്</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Firebase SDKs -->
+    <!-- Firebase App (compat) SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <!-- Firebase Realtime Database (compat) SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body class="bg-gray-100 p-6">
@@ -103,17 +104,18 @@
 
     <!-- Firebase Script -->
     <script>
-        // നിങ്ങളുടെ Firebase പ്രോജക്റ്റ് വിവരങ്ങൾ ഇവിടെ നൽകുക
+        // നിങ്ങൾ നൽകിയ പുതിയ ഫയർബേസ് കോൺഫിഗറേഷൻ
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyDzGRBflOY8-cNjECWGaPPOA-i4zrGfeIY",
+            authDomain: "registration-form-bbacd.firebaseapp.com",
+            projectId: "registration-form-bbacd",
+            storageBucket: "registration-form-bbacd.firebasestorage.app",
+            messagingSenderId: "729788425514",
+            appId: "1:729788425514:web:e78dee44b1383ba2082a53",
+            measurementId: "G-NWVDCF3DXM"
         };
 
+        // ഫയർബേസ് ഇനിഷ്യലൈസ് ചെയ്യുന്നു
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
