@@ -151,6 +151,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyDzGRBflOY8-cNjECWGaPPOA-i4zrGfeIY",
             authDomain: "registration-form-bbacd.firebaseapp.com",
+            databaseURL: "https://registration-form-bbacd-default-rtdb.firebaseio.com",
             projectId: "registration-form-bbacd",
             storageBucket: "registration-form-bbacd.firebasestorage.app",
             messagingSenderId: "729788425514",
@@ -196,7 +197,6 @@
             let username = document.getElementById('loginUsername').value.trim();
             let password = document.getElementById('loginPassword').value;
 
-            // Super Admin Credentials Check
             if(username === "sadmin" && password === "admin123") {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('superAdminApp').classList.remove('hidden');
@@ -311,7 +311,6 @@
                     tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">No data available</td></tr>`;
                     return;
                 }
-                keys.keys.forEach?.((key, index) => {}) // safe guard
                 keys.forEach((key, index) => {
                     let item = data[key];
                     tbody.innerHTML += `<tr>
