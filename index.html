@@ -8,7 +8,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <style>
-        /* To ensure the dropdown stays open when hovering over the menu items */
         .group:hover .group-hover\:block {
             display: block;
         }
@@ -86,7 +85,7 @@
         </div>
     </div>
 
-    <!-- MAIN APP DASHBOARD (NEW DESIGN) -->
+    <!-- MAIN APP DASHBOARD -->
     <div id="mainApp" class="hidden">
         
         <!-- Navigation Bar -->
@@ -94,14 +93,13 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
-                        <!-- Institution Name -->
-                        <div class="flex-shrink-0">
+                        <div class="flex-shrink-0 cursor-pointer" onclick="switchTab('homeSection')">
                             <span id="loggedInMahalluName" class="font-bold text-xl uppercase tracking-wider text-emerald-100">Institution Name</span>
                         </div>
                         
-                        <!-- Top Menu Tabs -->
                         <div class="hidden md:block">
                             <div class="ml-10 flex items-baseline space-x-2 text-sm font-medium">
+                                <button onclick="switchTab('homeSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Home</button>
                                 
                                 <!-- Mahallu Dropdown -->
                                 <div class="relative group">
@@ -111,25 +109,23 @@
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                                         </svg>
                                     </button>
-                                    <!-- Dropdown Items -->
                                     <div class="absolute left-0 mt-0 w-48 bg-white text-gray-800 rounded-md shadow-xl hidden group-hover:block border border-emerald-100">
+                                        <a href="#" onclick="switchTab('householdSection')" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700 border-b border-gray-100">വീടുകൾ (Houses)</a>
                                         <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700 border-b border-gray-100">ഭാരവാഹികൾ (Office Bearers)</a>
-                                        <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700 border-b border-gray-100">വാർഡുകൾ (Wards)</a>
-                                        <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700">വീടുകൾ (Houses)</a>
+                                        <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700">വാർഡുകൾ (Wards)</a>
                                     </div>
                                 </div>
                                 
-                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Madrasa</a>
-                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Alumni</a>
-                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">About Us</a>
-                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Contacts</a>
-                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Useful Links</a>
-                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Application Forms</a>
+                                <button onclick="switchTab('madrasaSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Madrasa</button>
+                                <button onclick="switchTab('alumniSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Alumni</button>
+                                <button onclick="switchTab('aboutSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">About Us</button>
+                                <button onclick="switchTab('contactSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Contacts</button>
+                                <button onclick="switchTab('linksSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Useful Links</button>
+                                <button onclick="switchTab('formsSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Application Forms</button>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Logout Button -->
                     <div>
                         <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow">Log Out</button>
                     </div>
@@ -137,13 +133,27 @@
             </div>
         </nav>
 
-        <!-- Main Content Area -->
-        <div class="max-w-7xl mx-auto p-4 md:p-8 mt-6">
-            <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100">
+        <!-- Content Sections -->
+        <div class="max-w-7xl mx-auto p-4 md:p-8 mt-4">
+
+            <!-- 1. HOME SECTION (With Mahallu / Mosque Image) -->
+            <div id="homeSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-150 text-center">
+                <h1 class="text-3xl font-bold text-emerald-900 mb-2">സ്വാഗതം! Welcome to Mahallu Portal</h1>
+                <p class="text-gray-600 mb-6">നിങ്ങളുടെ മഹല്ല് ഡിജിറ്റൽ മാനേജ്മെന്റ് സിസ്റ്റത്തിലേക്ക് സ്വാഗതം.</p>
+                <div class="max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg border border-emerald-100">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Mahallu Mosque" class="w-full h-72 object-cover">
+                </div>
+                <div class="mt-6">
+                    <button onclick="switchTab('householdSection')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl shadow transition">വീടുകളുടെ വിവരങ്ങൾ ചേർക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</button>
+                </div>
+            </div>
+
+            <!-- 2. HOUSEHOLD DETAILS SECTION -->
+            <div id="householdSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-4">Mahallu Household Details</h2>
                 <form id="mahalluForm" class="space-y-6">
                     <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
-                        <h2 class="text-lg font-bold text-emerald-800 mb-4 border-b pb-2">Household Details</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-gray-600 mb-1">Grihanathan Name</label>
                                 <input type="text" id="grihanathan" required class="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
@@ -161,11 +171,47 @@
                     <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition">Save Details</button>
                 </form>
             </div>
+
+            <!-- 3. MADRASA SECTION -->
+            <div id="madrasaSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-2">Madrasa Management</h2>
+                <p class="text-gray-600">മദ്രസ വിദ്യാർത്ഥികളുടെ വിവരങ്ങളും ക്ലാസുകളും ഇവിടെ കൈകാര്യം ചെയ്യാം.</p>
+            </div>
+
+            <!-- 4. ALUMNI SECTION -->
+            <div id="alumniSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-2">Alumni Portal</h2>
+                <p class="text-gray-600">പൂർവ്വ വിദ്യാർത്ഥി സംഗമങ്ങളും വിവരങ്ങളും.</p>
+            </div>
+
+            <!-- 5. ABOUT US SECTION -->
+            <div id="aboutSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-2">About Us</h2>
+                <p class="text-gray-600">മഹല്ല് കമ്മിറ്റിയെക്കുറിച്ചുള്ള വിശദവിവരങ്ങൾ.</p>
+            </div>
+
+            <!-- 6. CONTACTS SECTION -->
+            <div id="contactSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-2">Contacts</h2>
+                <p class="text-gray-600">ഭാരവാഹികളുടെ ഫോൺ നമ്പറുകളും മറ്റ് കോൺടാക്റ്റ് വിവരങ്ങളും.</p>
+            </div>
+
+            <!-- 7. USEFUL LINKS SECTION -->
+            <div id="linksSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-2">Useful Links</h2>
+                <p class="text-gray-600">പ്രധാനപ്പെട്ട ഔദ്യോഗിക ലിങ്കുകൾ.</p>
+            </div>
+
+            <!-- 8. APPLICATION FORMS SECTION -->
+            <div id="formsSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
+                <h2 class="text-xl font-bold text-emerald-900 mb-2">Application Forms</h2>
+                <p class="text-gray-600">സർട്ടിഫിക്കറ്റുകൾക്കും മറ്റ് ആവശ്യങ്ങൾക്കുമുള്ള അപേക്ഷാ ഫോമുകൾ.</p>
+            </div>
+
         </div>
     </div>
 
     <script>
-        // Database URL added to fix the login/register issue
         const firebaseConfig = {
             apiKey: "AIzaSyDzGRBflOY8-cNjECWGaPPOA-i4zrGfeIY",
             authDomain: "registration-form-bbacd.firebaseapp.com",
@@ -180,6 +226,13 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         let currentMahalluKey = "";
+
+        // Tab Switching Function
+        function switchTab(sectionId) {
+            let sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(sectionId).classList.remove('hidden');
+        }
 
         function toggleRegisterForm() {
             document.getElementById('loginScreen').classList.toggle('hidden');
@@ -233,10 +286,10 @@
                         return;
                     }
                     currentMahalluKey = emailKey;
-                    // സ്ഥാപനത്തിന്റെ പേര് നാവിഗേഷൻ ബാറിൽ സെറ്റ് ചെയ്യുന്നു
                     document.getElementById('loggedInMahalluName').innerText = mahallu.name;
                     document.getElementById('loginScreen').classList.add('hidden');
                     document.getElementById('mainApp').classList.remove('hidden');
+                    switchTab('homeSection'); // Show Home Section by default upon login
                 } else {
                     alert('Invalid username or password!');
                 }
