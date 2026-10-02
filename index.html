@@ -7,11 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <style>
+        /* To ensure the dropdown stays open when hovering over the menu items */
+        .group:hover .group-hover\:block {
+            display: block;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 p-4 md:p-8 min-h-screen">
+<body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 min-h-screen">
 
     <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-10">
+    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-emerald-900">Mahallu Software Login</h2>
             <p class="text-xs text-gray-600 mt-1">Enter your username and password</p>
@@ -33,7 +39,7 @@
     </div>
 
     <!-- REGISTER FORM -->
-    <div id="registerScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-10 hidden">
+    <div id="registerScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20 hidden">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-emerald-900">New Mahallu Registration</h2>
             <p class="text-xs text-gray-600 mt-1">Submit your details for Super Admin approval</p>
@@ -59,7 +65,7 @@
     </div>
 
     <!-- SUPER ADMIN DASHBOARD -->
-    <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
+    <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 mt-10 hidden">
         <div class="bg-indigo-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
             <h2 class="text-lg font-bold">Super Admin Panel</h2>
             <button onclick="logout()" class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg">Log Out</button>
@@ -80,26 +86,86 @@
         </div>
     </div>
 
-    <!-- MAIN APP DASHBOARD -->
-    <div id="mainApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
-        <div class="bg-emerald-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
-            <h2 id="loggedInMahalluName" class="text-lg font-bold">Mahallu Name</h2>
-            <button onclick="logout()" class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg">Log Out</button>
-        </div>
-        <form id="mahalluForm" class="space-y-6">
-            <div class="bg-emerald-50/60 p-6 rounded-xl border">
-                <h2 class="text-md font-bold text-emerald-800 mb-4">Household Details</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <input type="text" id="grihanathan" placeholder="Grihanathan Name" required class="border p-2.5 rounded-lg text-sm">
-                    <input type="text" id="veettuperu" placeholder="House Name" required class="border p-2.5 rounded-lg text-sm">
-                    <input type="text" id="panchayat" placeholder="Panchayat" class="border p-2.5 rounded-lg text-sm">
+    <!-- MAIN APP DASHBOARD (NEW DESIGN) -->
+    <div id="mainApp" class="hidden">
+        
+        <!-- Navigation Bar -->
+        <nav class="bg-emerald-800 text-white shadow-lg sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center">
+                        <!-- Institution Name -->
+                        <div class="flex-shrink-0">
+                            <span id="loggedInMahalluName" class="font-bold text-xl uppercase tracking-wider text-emerald-100">Institution Name</span>
+                        </div>
+                        
+                        <!-- Top Menu Tabs -->
+                        <div class="hidden md:block">
+                            <div class="ml-10 flex items-baseline space-x-2 text-sm font-medium">
+                                
+                                <!-- Mahallu Dropdown -->
+                                <div class="relative group">
+                                    <button class="hover:bg-emerald-700 px-3 py-2 rounded-md inline-flex items-center transition">
+                                        Mahallu
+                                        <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown Items -->
+                                    <div class="absolute left-0 mt-0 w-48 bg-white text-gray-800 rounded-md shadow-xl hidden group-hover:block border border-emerald-100">
+                                        <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700 border-b border-gray-100">ഭാരവാഹികൾ (Office Bearers)</a>
+                                        <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700 border-b border-gray-100">വാർഡുകൾ (Wards)</a>
+                                        <a href="#" class="block px-4 py-3 text-sm hover:bg-emerald-50 hover:text-emerald-700">വീടുകൾ (Houses)</a>
+                                    </div>
+                                </div>
+                                
+                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Madrasa</a>
+                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Alumni</a>
+                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">About Us</a>
+                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Contacts</a>
+                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Useful Links</a>
+                                <a href="#" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Application Forms</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Logout Button -->
+                    <div>
+                        <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow">Log Out</button>
+                    </div>
                 </div>
             </div>
-            <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg">Save Details</button>
-        </form>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="max-w-7xl mx-auto p-4 md:p-8 mt-6">
+            <div class="bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100">
+                <form id="mahalluForm" class="space-y-6">
+                    <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
+                        <h2 class="text-lg font-bold text-emerald-800 mb-4 border-b pb-2">Household Details</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">Grihanathan Name</label>
+                                <input type="text" id="grihanathan" required class="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">House Name</label>
+                                <input type="text" id="veettuperu" required class="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-600 mb-1">Panchayat</label>
+                                <input type="text" id="panchayat" class="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition">Save Details</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
+        // Database URL added to fix the login/register issue
         const firebaseConfig = {
             apiKey: "AIzaSyDzGRBflOY8-cNjECWGaPPOA-i4zrGfeIY",
             authDomain: "registration-form-bbacd.firebaseapp.com",
@@ -167,6 +233,7 @@
                         return;
                     }
                     currentMahalluKey = emailKey;
+                    // സ്ഥാപനത്തിന്റെ പേര് നാവിഗേഷൻ ബാറിൽ സെറ്റ് ചെയ്യുന്നു
                     document.getElementById('loggedInMahalluName').innerText = mahallu.name;
                     document.getElementById('loginScreen').classList.add('hidden');
                     document.getElementById('mainApp').classList.remove('hidden');
