@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>മഹല്ല് മാനേജ്മെന്റ് സിസ്റ്റം (SaaS)</title>
+    <title>കേരള മഹല്ല് മാനേജ്മെന്റ് സിസ്റ്റം (SaaS)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font (Manjari for Malayalam) -->
@@ -17,16 +17,16 @@
 </head>
 <body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 p-4 md:p-8 min-h-screen">
 
-    <!-- 1. LOGIN SCREEN (Initially Visible) -->
+    <!-- 1. LOGIN SCREEN -->
     <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-emerald-900">🕌 മഹല്ല് സോഫ്റ്റ്‌വെയർ ലോഗിൻ</h2>
-            <p class="text-xs text-gray-600 mt-1">നിങ്ങളുടെ മഹല്ല് ഇമെയിലും പാസ്‌വേർഡും നൽകി പ്രവേശിക്കുക</p>
+            <p class="text-xs text-gray-600 mt-1">യൂസർനെയിമും പാസ്‌വേർഡും നൽകി പ്രവേശിക്കുക</p>
         </div>
         <form id="loginForm" class="space-y-4">
             <div>
-                <label class="block text-xs font-bold text-gray-700 mb-1">മഹല്ല് ഇമെയിൽ ഐഡി:</label>
-                <input type="email" id="loginEmail" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="mahallu@gmail.com">
+                <label class="block text-xs font-bold text-gray-700 mb-1">യൂസർനെയിം / ഇമെയിൽ:</label>
+                <input type="text" id="loginUsername" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="sadmin അല്ലെങ്കിൽ email">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-1">പാസ്‌വേർഡ്:</label>
@@ -36,30 +36,57 @@
         </form>
     </div>
 
-    <!-- 2. MAIN APP DASHBOARD (Hidden until login) -->
-    <div id="mainApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
-        
-        <!-- Mahallu Header & Logout Bar -->
-        <div class="bg-emerald-900 text-white p-4 rounded-xl mb-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-md">
+    <!-- 2. SUPER ADMIN DASHBOARD (Visible only for sadmin) -->
+    <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
+        <div class="bg-indigo-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
             <div>
-                <h2 id="loggedInMahalluName" class="text-lg font-bold">മഹല്ല് പേര്</h2>
-                <p class="text-xs text-emerald-200">കാലാവധി (Expiry Date): <span id="expiryDateDisplay" class="font-bold text-yellow-300">-</span></p>
+                <h2 class="text-lg font-bold">👑 സൂപ്പർ അഡ്മിൻ പാനൽ</h2>
+                <p class="text-xs text-indigo-200">മഹല്ലുകളുടെ രജിസ്ട്രേഷനും അപ്രൂവലുകളും നിയന്ത്രിക്കുക</p>
             </div>
-            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">ലോഗ് ഔട്ട് ചെയ്യുക</button>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">ലോഗ് ഔട്ട്</button>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b pb-4 gap-4">
-            <div>
-                <h1 class="text-2xl font-bold text-emerald-900">സ്ഥിതി വിവര കണക്ക് & സർവ്വെ</h1>
+        <div class="space-y-6">
+            <h3 class="text-md font-bold text-gray-800">അപ്രൂവൽ കാത്തിരിക്കുന്ന മഹല്ലുകൾ</h3>
+            <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
+                    <thead class="bg-indigo-800 text-white text-xs">
+                        <tr>
+                            <th class="px-3 py-3 text-center">നമ്പർ</th>
+                            <th class="px-3 py-3 text-left">മഹല്ലിന്റെ പേര്</th>
+                            <th class="px-3 py-3 text-left">ഇമെയിൽ</th>
+                            <th class="px-3 py-3 text-center">കാലാവധി (Expiry)</th>
+                            <th class="px-3 py-3 text-center">സ്റ്റാറ്റസ്</th>
+                            <th class="px-3 py-3 text-center">നടപടികൾ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 text-gray-700" id="approvalTableBody">
+                        <!-- Dynamic Approval List -->
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </div>
+
+    <!-- 3. NORMAL MAHALLU APP DASHBOARD (Hidden until logged in as mahallu) -->
+    <div id="mainApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
+        <div class="bg-emerald-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
+            <div>
+                <h2 id="loggedInMahalluName" class="text-lg font-bold">മഹല്ല് പേര്</h2>
+                <p class="text-xs text-emerald-200">കാലാവധി: <span id="expiryDateDisplay" class="font-bold text-yellow-300">-</span></p>
+            </div>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">ലോഗ് ഔട്ട്</button>
+        </div>
+
+        <div class="flex justify-between items-center mb-8 border-b pb-4">
+            <h1 class="text-2xl font-bold text-emerald-900">സ്ഥിതി വിവര കണക്ക് & സർവ്വെ</h1>
             <div class="flex gap-2 bg-emerald-100 p-1 rounded-xl">
                 <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">സർവ്വെ ഫോം</button>
                 <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">ഡാഷ്‌ബോർഡ്</button>
             </div>
         </div>
 
-        <!-- SURVEY FORM SECTION -->
+        <!-- SURVEY FORM -->
         <div id="sectionForm">
             <form id="mahalluForm" class="space-y-6">
                 <div class="bg-emerald-50/60 p-6 rounded-xl border border-emerald-200/60 shadow-sm">
@@ -72,31 +99,13 @@
                         <div><label class="block text-xs font-bold text-gray-700 mb-1">വീട് നമ്പർ:</label><input type="text" id="houseNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
                     </div>
                 </div>
-
-                <!-- Members Section -->
-                <div>
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">👥 അംഗങ്ങളുടെ വിവരങ്ങൾ</h3>
-                        <button type="button" onclick="addRow()" class="bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg">+ അംഗത്തെ ചേർക്കുക</button>
-                    </div>
-                    <div id="memberRows" class="space-y-4">
-                        <div class="member-card bg-gray-50 p-5 rounded-xl border relative">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                                <div><label class="block text-xs font-bold mb-1">പേര്:</label><input type="text" class="w-full bg-white border p-2 rounded-lg name" required></div>
-                                <div><label class="block text-xs font-bold mb-1">ഫോൺ:</label><input type="text" class="w-full bg-white border p-2 rounded-lg phone"></div>
-                                <div><label class="block text-xs font-bold mb-1">ബന്ധം:</label><input type="text" class="w-full bg-white border p-2 rounded-lg relation"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="text-center pt-6 border-t">
                     <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg w-full md:w-auto">വിവരങ്ങൾ സേവ് ചെയ്യുക</button>
                 </div>
             </form>
         </div>
 
-        <!-- ADMIN TABLE SECTION -->
+        <!-- ADMIN TABLE -->
         <div id="sectionAdmin" class="hidden space-y-6">
             <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
@@ -128,26 +137,38 @@
 
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
-
         let currentMahalluKey = "";
 
-        // Login Handler with Expiry Check
+        // Login Handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            let email = document.getElementById('loginEmail').value.trim().replace('.', '_');
+            let username = document.getElementById('loginUsername').value.trim();
             let password = document.getElementById('loginPassword').value;
 
-            database.ref('registered_mahallus/' + email).once('value').then(snapshot => {
+            // Check Super Admin Login
+            if(username === "sadmin" && password === "admin123") {
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('superAdminApp').classList.remove('hidden');
+                loadSuperAdminApprovals();
+                return;
+            }
+
+            // Check Normal Mahallu Login
+            let emailKey = username.replace('.', '_');
+            database.ref('registered_mahallus/' + emailKey).once('value').then(snapshot => {
                 let mahallu = snapshot.val();
                 if(mahallu && mahallu.password === password) {
-                    // Check Expiry Date
+                    if(mahallu.status !== "Approved") {
+                        alert('⚠️ നിങ്ങളുടെ അക്കൗണ്ട് സൂപ്പർ അഡ്മിൻ ഇതുവരെ അപ്രൂവ് ചെയ്തിട്ടില്ല.');
+                        return;
+                    }
                     let today = new Date().toISOString().split('T')[0];
                     if(mahallu.expiryDate && mahallu.expiryDate < today) {
-                        alert('⚠️ നിങ്ങളുടെ സോഫ്റ്റ്‌വെയർ ആക്സസ് കാലാവധി അവസാനിച്ചിരിക്കുന്നു. ദയവായി പുതുക്കുക.');
+                        alert('⚠️️ നിങ്ങളുടെ സോഫ്റ്റ്‌വെയർ ആക്സസ് കാലാവധി അവസാനിച്ചിരിക്കുന്നു.');
                         return;
                     }
 
-                    currentMahalluKey = email;
+                    currentMahalluKey = emailKey;
                     document.getElementById('loggedInMahalluName').innerText = mahallu.name;
                     document.getElementById('expiryDateDisplay').innerText = mahallu.expiryDate || 'Unlimited';
                     
@@ -155,7 +176,7 @@
                     document.getElementById('mainApp').classList.remove('hidden');
                     loadAdminData();
                 } else {
-                    alert('തെറ്റായ ഇമെയിൽ അല്ലെങ്കിൽ പാസ്‌വേർഡ്!');
+                    alert('തെറ്റായ യൂസർനെയിം അല്ലെങ്കിൽ പാസ്‌വേർഡ്!');
                 }
             });
         });
@@ -164,6 +185,55 @@
             location.reload();
         }
 
+        // Super Admin Approval Functions
+        function loadSuperAdminApprovals() {
+            database.ref('registered_mahallus').on('value', snapshot => {
+                let data = snapshot.val() || {};
+                let tbody = document.getElementById('approvalTableBody');
+                tbody.innerHTML = '';
+                let keys = Object.keys(data);
+                
+                if(keys.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-500">രജിസ്ട്രേഷനുകൾ ഒന്നും ലഭ്യമല്ല</td></tr>`;
+                    return;
+                }
+
+                keys.forEach((key, index) => {
+                    let item = data[key];
+                    let statusBadge = item.status === "Approved" ? 
+                        `<span class="bg-green-100 text-green-800 px-2.5 py-1 rounded-full text-xs font-bold">Approved</span>` : 
+                        `<span class="bg-yellow-100 text-yellow-800 px-2.5 py-1 rounded-full text-xs font-bold">Pending</span>`;
+                    
+                    tbody.innerHTML += `<tr>
+                        <td class="px-3 py-3 text-center">${index + 1}</td>
+                        <td class="px-3 py-3 font-semibold">${item.name}</td>
+                        <td class="px-3 py-3">${item.email || key.replace('_', '.')}</td>
+                        <td class="px-3 py-3 text-center">${item.expiryDate || 'N/A'}</td>
+                        <td class="px-3 py-3 text-center">${statusBadge}</td>
+                        <td class="px-3 py-3 text-center space-x-2">
+                            <button onclick="approveMahallu('${key}')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">അപ്രൂവ് ചെയ്യുക</button>
+                            <button onclick="rejectMahallu('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">നിരസിക്കുക</button>
+                        </td>
+                    </tr>`;
+                });
+            });
+        }
+
+        function approveMahallu(key) {
+            database.ref(`registered_mahallus/${key}`).update({ status: "Approved" }).then(() => {
+                alert('മഹല്ല് വിജയകരമായി അപ്രൂവ് ചെയ്തു!');
+            });
+        }
+
+        function rejectMahallu(key) {
+            if(confirm('ഈ മഹല്ല് നിരസിക്കണമെന്നുറപ്പാണോ?')) {
+                database.ref(`registered_mahallus/${key}`).remove().then(() => {
+                    alert('ഡിലീറ്റ് ചെയ്തു!');
+                });
+            }
+        }
+
+        // Normal Mahallu Tabs & Functions
         function switchTab(tab) {
             if(tab === 'form') {
                 document.getElementById('sectionForm').classList.remove('hidden');
@@ -173,18 +243,6 @@
                 document.getElementById('sectionAdmin').classList.remove('hidden');
                 loadAdminData();
             }
-        }
-
-        function addRow() {
-            let container = document.getElementById('memberRows');
-            let div = document.createElement('div');
-            div.className = "member-card bg-gray-50 p-5 rounded-xl border relative";
-            div.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                <div><label class="block text-xs font-bold mb-1">പേര്:</label><input type="text" class="w-full bg-white border p-2 rounded-lg name" required></div>
-                <div><label class="block text-xs font-bold mb-1">ഫോൺ:</label><input type="text" class="w-full bg-white border p-2 rounded-lg phone"></div>
-                <div><label class="block text-xs font-bold mb-1">ബന്ധം:</label><input type="text" class="w-full bg-white border p-2 rounded-lg relation"></div>
-            </div>`;
-            container.appendChild(div);
         }
 
         document.getElementById('mahalluForm').addEventListener('submit', function(e) {
