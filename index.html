@@ -107,7 +107,8 @@
             storageBucket: "registration-form-bbacd.firebasestorage.app",
             messagingSenderId: "729788425514",
             appId: "1:729788425514:web:e78dee44b1383ba2082a53",
-            measurementId: "G-NWVDCF3DXM"
+            measurementId: "G-NWVDCF3DXM",
+            databaseURL: "https://registration-form-bbacd-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
 
         firebase.initializeApp(firebaseConfig);
@@ -124,7 +125,7 @@
             let name = document.getElementById('regMahalluName').value;
             let email = document.getElementById('regEmail').value.trim();
             let password = document.getElementById('regPassword').value;
-            let emailKey = email.replace(/[.#$\/\[\]]/g, '_');
+            let emailKey = email.replace(/[.#$/[\]]/g, '_');
 
             let regData = {
                 name: name,
@@ -157,7 +158,7 @@
                 return;
             }
 
-            let emailKey = username.replace(/[.#$\/\[\]]/g, '_');
+            let emailKey = username.replace(/[.#$/[\]]/g, '_');
             database.ref('registered_mahallus/' + emailKey).once('value').then(snapshot => {
                 let mahallu = snapshot.val();
                 if(mahallu && mahallu.password === password) {
