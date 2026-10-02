@@ -4,35 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mahallu Management System</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 </head>
 <body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 p-4 md:p-8 min-h-screen">
 
-    <!-- 1. LOGIN SCREEN -->
+    <!-- LOGIN SCREEN -->
     <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-10">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-emerald-900">Mahallu Software Login</h2>
-            <p class="text-xs text-gray-600 mt-1">Enter your username and password to access</p>
+            <p class="text-xs text-gray-600 mt-1">Enter your username and password</p>
         </div>
         <form id="loginForm" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-1">Username / Email:</label>
-                <input type="text" id="loginUsername" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="e.g., sadmin or email">
+                <input type="text" id="loginUsername" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="********">
+                <input type="password" id="loginPassword" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
             </div>
             <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl shadow transition">Login</button>
         </form>
-
         <div class="mt-6 text-center border-t pt-4">
-            <p class="text-xs text-gray-600">New Mahallu?</p>
-            <button onclick="toggleRegisterForm()" class="text-emerald-700 font-bold text-xs mt-1 hover:underline">Click here to Register</button>
+            <button type="button" onclick="toggleRegisterForm()" class="text-emerald-700 font-bold text-xs hover:underline">New Mahallu? Click here to Register</button>
         </div>
     </div>
 
@@ -45,108 +41,64 @@
         <form id="registerForm" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-1">Mahallu Name:</label>
-                <input type="text" id="regMahalluName" required class="w-full border p-2.5 rounded-lg text-sm" placeholder="Mahallu Name">
+                <input type="text" id="regMahalluName" required class="w-full border p-2.5 rounded-lg text-sm">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-1">Email ID:</label>
-                <input type="email" id="regEmail" required class="w-full border p-2.5 rounded-lg text-sm" placeholder="mahallu@gmail.com">
+                <input type="email" id="regEmail" required class="w-full border p-2.5 rounded-lg text-sm">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 mb-1">Password:</label>
-                <input type="password" id="regPassword" required class="w-full border p-2.5 rounded-lg text-sm" placeholder="********">
+                <input type="password" id="regPassword" required class="w-full border p-2.5 rounded-lg text-sm">
             </div>
             <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow transition">Send Registration Request</button>
         </form>
         <div class="mt-6 text-center border-t pt-4">
-            <button onclick="toggleRegisterForm()" class="text-gray-600 font-bold text-xs hover:underline">Back to Login</button>
+            <button type="button" onclick="toggleRegisterForm()" class="text-gray-600 font-bold text-xs hover:underline">Back to Login</button>
         </div>
     </div>
 
-    <!-- 2. SUPER ADMIN DASHBOARD -->
+    <!-- SUPER ADMIN DASHBOARD -->
     <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
         <div class="bg-indigo-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
-            <div>
-                <h2 class="text-lg font-bold">Super Admin Panel</h2>
-                <p class="text-xs text-indigo-200">Manage Mahallu registrations and approvals</p>
-            </div>
-            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">Log Out</button>
+            <h2 class="text-lg font-bold">Super Admin Panel</h2>
+            <button onclick="logout()" class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg">Log Out</button>
         </div>
-
-        <div class="space-y-6">
-            <h3 class="text-md font-bold text-gray-800">Pending Mahallu Approvals</h3>
-            <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
-                <table class="min-w-full divide-y divide-gray-200 text-sm">
-                    <thead class="bg-indigo-800 text-white text-xs">
-                        <tr>
-                            <th class="px-3 py-3 text-center">No</th>
-                            <th class="px-3 py-3 text-left">Mahallu Name</th>
-                            <th class="px-3 py-3 text-left">Email</th>
-                            <th class="px-3 py-3 text-center">Status</th>
-                            <th class="px-3 py-3 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 text-gray-700" id="approvalTableBody"></tbody>
-                </table>
-            </div>
+        <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
+            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <thead class="bg-indigo-800 text-white text-xs">
+                    <tr>
+                        <th class="px-3 py-3 text-center">No</th>
+                        <th class="px-3 py-3 text-left">Mahallu Name</th>
+                        <th class="px-3 py-3 text-left">Email</th>
+                        <th class="px-3 py-3 text-center">Status</th>
+                        <th class="px-3 py-3 text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 text-gray-700" id="approvalTableBody"></tbody>
+            </table>
         </div>
     </div>
 
-    <!-- 3. NORMAL MAHALLU APP DASHBOARD -->
+    <!-- MAIN APP DASHBOARD -->
     <div id="mainApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
         <div class="bg-emerald-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
-            <div>
-                <h2 id="loggedInMahalluName" class="text-lg font-bold">Mahallu Name</h2>
-                <p class="text-xs text-emerald-200">Status: <span class="font-bold text-yellow-300">Active</span></p>
-            </div>
-            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">Log Out</button>
+            <h2 id="loggedInMahalluName" class="text-lg font-bold">Mahallu Name</h2>
+            <button onclick="logout()" class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg">Log Out</button>
         </div>
-
-        <div class="flex justify-between items-center mb-8 border-b pb-4">
-            <h1 class="text-2xl font-bold text-emerald-900">Sthithi Vivara Kanakku & Survey</h1>
-            <div class="flex gap-2 bg-emerald-100 p-1 rounded-xl">
-                <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">Survey Form</button>
-                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">Dashboard</button>
-            </div>
-        </div>
-
-        <!-- SURVEY FORM -->
-        <div id="sectionForm">
-            <form id="mahalluForm" class="space-y-6">
-                <div class="bg-emerald-50/60 p-6 rounded-xl border border-emerald-200/60 shadow-sm">
-                    <h2 class="text-md font-bold text-emerald-800 mb-4">Household Details</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Grihanathan Name:</label><input type="text" id="grihanathan" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">House Name:</label><input type="text" id="veettuperu" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Panchayat:</label><input type="text" id="panchayat" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Ward Number:</label><input type="text" id="wardNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">House Number:</label><input type="text" id="houseNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                    </div>
+        <form id="mahalluForm" class="space-y-6">
+            <div class="bg-emerald-50/60 p-6 rounded-xl border">
+                <h2 class="text-md font-bold text-emerald-800 mb-4">Household Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="text" id="grihanathan" placeholder="Grihanathan Name" required class="border p-2.5 rounded-lg text-sm">
+                    <input type="text" id="veettuperu" placeholder="House Name" required class="border p-2.5 rounded-lg text-sm">
+                    <input type="text" id="panchayat" placeholder="Panchayat" class="border p-2.5 rounded-lg text-sm">
                 </div>
-                <div class="text-center pt-6 border-t">
-                    <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg w-full md:w-auto">Save Details</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- ADMIN TABLE -->
-        <div id="sectionAdmin" class="hidden space-y-6">
-            <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
-                <table class="min-w-full divide-y divide-gray-200 text-sm">
-                    <thead class="bg-emerald-800 text-white text-xs">
-                        <tr>
-                            <th class="px-3 py-3 text-center">No</th>
-                            <th class="px-3 py-3 text-left">Grihanathan</th>
-                            <th class="px-3 py-3 text-left">House Name</th>
-                            <th class="px-3 py-3 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200 text-gray-700" id="tableBody"></tbody>
-                </table>
             </div>
-        </div>
+            <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg">Save Details</button>
+        </form>
     </div>
 
-    <!-- Script Logic -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyDzGRBflOY8-cNjECWGaPPOA-i4zrGfeIY",
@@ -173,7 +125,7 @@
             let name = document.getElementById('regMahalluName').value;
             let email = document.getElementById('regEmail').value.trim();
             let password = document.getElementById('regPassword').value;
-            let emailKey = email.replace('.', '_');
+            let emailKey = email.replace(/[.#$\/\[\]]/g, '_');
 
             let regData = {
                 name: name,
@@ -183,13 +135,15 @@
                 expiryDate: "2027-12-31"
             };
 
-            database.ref('registered_mahallus/' + emailKey).set(regData).then(() => {
-                alert('Registration request submitted successfully! Please wait for Super Admin approval.');
-                document.getElementById('registerForm').reset();
-                toggleRegisterForm();
-            }).catch(err => {
-                alert('Error: ' + err.message);
-            });
+            database.ref('registered_mahallus/' + emailKey).set(regData)
+                .then(() => {
+                    alert('Registration request submitted successfully!');
+                    document.getElementById('registerForm').reset();
+                    toggleRegisterForm();
+                })
+                .catch(err => {
+                    alert('Error: ' + err.message);
+                });
         });
 
         document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -204,20 +158,18 @@
                 return;
             }
 
-            let emailKey = username.replace('.', '_');
+            let emailKey = username.replace(/[.#$\/\[\]]/g, '_');
             database.ref('registered_mahallus/' + emailKey).once('value').then(snapshot => {
                 let mahallu = snapshot.val();
                 if(mahallu && mahallu.password === password) {
                     if(mahallu.status !== "Approved") {
-                        alert('Your account is not yet approved by the Super Admin.');
+                        alert('Your account is pending approval.');
                         return;
                     }
                     currentMahalluKey = emailKey;
                     document.getElementById('loggedInMahalluName').innerText = mahallu.name;
-                    
                     document.getElementById('loginScreen').classList.add('hidden');
                     document.getElementById('mainApp').classList.remove('hidden');
-                    loadAdminData();
                 } else {
                     alert('Invalid username or password!');
                 }
@@ -243,17 +195,17 @@
                 keys.forEach((key, index) => {
                     let item = data[key];
                     let statusBadge = item.status === "Approved" ? 
-                        `<span class="bg-green-100 text-green-800 px-2.5 py-1 rounded-full text-xs font-bold">Approved</span>` : 
-                        `<span class="bg-yellow-100 text-yellow-800 px-2.5 py-1 rounded-full text-xs font-bold">Pending</span>`;
+                        `<span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-bold">Approved</span>` : 
+                        `<span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-bold">Pending</span>`;
                     
                     tbody.innerHTML += `<tr>
                         <td class="px-3 py-3 text-center">${index + 1}</td>
                         <td class="px-3 py-3 font-semibold">${item.name}</td>
-                        <td class="px-3 py-3">${item.email || key.replace('_', '.')}</td>
+                        <td class="px-3 py-3">${item.email}</td>
                         <td class="px-3 py-3 text-center">${statusBadge}</td>
                         <td class="px-3 py-3 text-center space-x-2">
-                            <button onclick="approveMahallu('${key}')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">Approve</button>
-                            <button onclick="rejectMahallu('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">Reject</button>
+                            <button onclick="approveMahallu('${key}')" class="bg-green-600 text-white px-3 py-1 rounded text-xs font-bold">Approve</button>
+                            <button onclick="rejectMahallu('${key}')" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">Reject</button>
                         </td>
                     </tr>`;
                 });
@@ -267,65 +219,8 @@
         }
 
         function rejectMahallu(key) {
-            if(confirm('Are you sure you want to reject/delete this Mahallu?')) {
-                database.ref(`registered_mahallus/${key}`).remove().then(() => {
-                    alert('Deleted successfully!');
-                });
-            }
-        }
-
-        function switchTab(tab) {
-            if(tab === 'form') {
-                document.getElementById('sectionForm').classList.remove('hidden');
-                document.getElementById('sectionAdmin').classList.add('hidden');
-            } else {
-                document.getElementById('sectionForm').classList.add('hidden');
-                document.getElementById('sectionAdmin').classList.remove('hidden');
-                loadAdminData();
-            }
-        }
-
-        document.getElementById('mahalluForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let formData = {
-                grihanathan: document.getElementById('grihanathan').value,
-                veettuperu: document.getElementById('veettuperu').value,
-                panchayat: document.getElementById('panchayat').value,
-                wardNo: document.getElementById('wardNo').value,
-                houseNo: document.getElementById('houseNo').value
-            };
-
-            database.ref(`mahallu_data/${currentMahalluKey}/surveys/` + Date.now()).set(formData).then(() => {
-                alert('Details saved successfully!');
-                document.getElementById('mahalluForm').reset();
-            });
-        });
-
-        function loadAdminData() {
-            database.ref(`mahallu_data/${currentMahalluKey}/surveys`).on('value', snapshot => {
-                let data = snapshot.val() || {};
-                let tbody = document.getElementById('tableBody');
-                tbody.innerHTML = '';
-                let keys = Object.keys(data);
-                if(keys.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">No data available</td></tr>`;
-                    return;
-                }
-                keys.forEach((key, index) => {
-                    let item = data[key];
-                    tbody.innerHTML += `<tr>
-                        <td class="px-3 py-3 text-center">${index + 1}</td>
-                        <td class="px-3 py-3 font-semibold">${item.grihanathan}</td>
-                        <td class="px-3 py-3">${item.veettuperu}</td>
-                        <td class="px-3 py-3 text-center"><button onclick="deleteData('${key}')" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">Delete</button></td>
-                    </tr>`;
-                });
-            });
-        }
-
-        function deleteData(key) {
-            if(confirm('Are you sure you want to delete this record?')) {
-                database.ref(`mahallu_data/${currentMahalluKey}/surveys/` + key).remove();
+            if(confirm('Are you sure you want to delete this Mahallu?')) {
+                database.ref(`registered_mahallus/${key}`).remove();
             }
         }
     </script>
