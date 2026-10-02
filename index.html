@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>മഹല്ല് മാനേജ്മെന്റ് സിസ്റ്റം</title>
+    <title>കേരള മഹല്ല് മാനേജ്മെന്റ് സിസ്റ്റം (SaaS)</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font (Manjari for Malayalam) -->
@@ -16,67 +16,60 @@
     </style>
 </head>
 <body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 p-4 md:p-8 min-h-screen">
-    <div class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100">
+
+    <!-- 1. LOGIN SCREEN (Initially Visible) -->
+    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20">
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-emerald-900">🕌 മഹല്ല് സോഫ്റ്റ്‌വെയർ ലോഗിൻ</h2>
+            <p class="text-xs text-gray-600 mt-1">നിങ്ങളുടെ മഹല്ല് ഇമെയിലും പാസ്‌വേർഡും നൽകി പ്രവേശിക്കുക</p>
+        </div>
+        <form id="loginForm" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">മഹല്ല് ഇമെയിൽ ഐഡി:</label>
+                <input type="email" id="loginEmail" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="mahallu@gmail.com">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">പാസ്‌വേർഡ്:</label>
+                <input type="password" id="loginPassword" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="********">
+            </div>
+            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl shadow transition">ലോഗിൻ ചെയ്യുക</button>
+        </form>
+    </div>
+
+    <!-- 2. MAIN APP DASHBOARD (Hidden until login) -->
+    <div id="mainApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
         
-        <!-- Mahallu Selection Bar (Global Header) -->
+        <!-- Mahallu Header & Logout Bar -->
         <div class="bg-emerald-900 text-white p-4 rounded-xl mb-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-md">
             <div>
-                <h2 class="text-lg font-bold">🕌 മഹല്ല് സോഫ്റ്റ്‌വെയർ പോർട്ടൽ</h2>
-                <p class="text-xs text-emerald-200">നിങ്ങളുടെ മഹല്ല് തിരഞ്ഞെടുത്ത് സേവനങ്ങൾ ഉപയോഗിക്കുക</p>
+                <h2 id="loggedInMahalluName" class="text-lg font-bold">മഹല്ല് പേര്</h2>
+                <p class="text-xs text-emerald-200">കാലാവധി (Expiry Date): <span id="expiryDateDisplay" class="font-bold text-yellow-300">-</span></p>
             </div>
-            <div class="flex items-center gap-2 w-full md:w-auto">
-                <select id="globalMahalluSelect" onchange="changeMahallu()" class="bg-white text-gray-900 font-bold p-2 rounded-lg text-sm w-full md:w-64 outline-none">
-                    <option value="vilangampoyil">വിലങ്ങംപൊയിൽ മഹല്ല്</option>
-                    <option value="kozhikode_town">കോഴിക്കോട് ടൗൺ മഹല്ല്</option>
-                    <option value="malappuram_central">മലപ്പുറം സെൻട്രൽ മഹല്ല്</option>
-                    <option value="other">മറ്റ് മഹല്ലുകൾ</option>
-                </select>
-            </div>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">ലോഗ് ഔട്ട് ചെയ്യുക</button>
         </div>
 
-        <!-- Header Section & Navigation Tabs -->
+        <!-- Navigation Tabs -->
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 border-b pb-4 gap-4">
             <div>
-                <h1 id="currentMahalluTitle" class="text-2xl md:text-3xl font-bold text-emerald-900 tracking-wide">വിലങ്ങംപൊയിൽ മഹല്ല്</h1>
-                <p class="text-sm md:text-base font-semibold text-emerald-700 mt-1">മഹല്ല് സ്ഥിതി വിവര കണക്ക്</p>
+                <h1 class="text-2xl font-bold text-emerald-900">സ്ഥിതി വിവര കണക്ക് & സർവ്വെ</h1>
             </div>
             <div class="flex gap-2 bg-emerald-100 p-1 rounded-xl">
                 <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">സർവ്വെ ഫോം</button>
-                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">അഡ്മിൻ ഡാഷ്‌ബോർഡ്</button>
+                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">ഡാഷ്‌ബോർഡ്</button>
             </div>
         </div>
 
-        <!-- 1. DATA ENTRY FORM SECTION -->
+        <!-- SURVEY FORM SECTION -->
         <div id="sectionForm">
             <form id="mahalluForm" class="space-y-6">
-                <!-- Basic Details Card -->
                 <div class="bg-emerald-50/60 p-6 rounded-xl border border-emerald-200/60 shadow-sm">
-                    <h2 class="text-md font-bold text-emerald-800 mb-4 flex items-center gap-2">🏠 ഗൃഹ വിവരങ്ങൾ</h2>
+                    <h2 class="text-md font-bold text-emerald-800 mb-4">🏠 ഗൃഹ വിവരങ്ങൾ</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">ഗൃഹനാഥൻ്റെ പേര്:</label>
-                            <input type="text" id="grihanathan" required class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">വീട്ടുപേര്:</label>
-                            <input type="text" id="veettuperu" required class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">പഞ്ചായത്ത്:</label>
-                            <input type="text" id="panchayat" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">വാർഡ് നമ്പർ:</label>
-                            <input type="text" id="wardNo" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">വീട് നമ്പർ:</label>
-                            <input type="text" id="houseNo" class="w-full bg-white rounded-lg border border-gray-300 p-2.5 text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">മഹല്ല്:</label>
-                            <input type="text" id="mahalluInputDisplay" readonly class="w-full bg-gray-100 rounded-lg border border-gray-300 p-2.5 text-sm font-bold text-emerald-900 outline-none">
-                        </div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">ഗൃഹനാഥൻ്റെ പേര്:</label><input type="text" id="grihanathan" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">വീട്ടുപേര്:</label><input type="text" id="veettuperu" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">പഞ്ചായത്ത്:</label><input type="text" id="panchayat" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">വാർഡ് നമ്പർ:</label><input type="text" id="wardNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">വീട് നമ്പർ:</label><input type="text" id="houseNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
                     </div>
                 </div>
 
@@ -84,102 +77,44 @@
                 <div>
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-gray-800">👥 അംഗങ്ങളുടെ വിവരങ്ങൾ</h3>
-                        <button type="button" onclick="addRow()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-4 py-2 rounded-lg shadow transition">+ അംഗത്തെ ചേർക്കുക</button>
+                        <button type="button" onclick="addRow()" class="bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg">+ അംഗത്തെ ചേർക്കുക</button>
                     </div>
-
                     <div id="memberRows" class="space-y-4">
-                        <!-- Default Member Card -->
-                        <div class="member-card bg-gray-50/80 p-5 rounded-xl border border-gray-200 shadow-sm relative">
-                            <div class="flex justify-between items-center mb-3 border-b pb-2">
-                                <span class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-full">അംഗം #<span class="sr-no">1</span></span>
-                                <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700 text-xs font-bold bg-red-50 px-2.5 py-1 rounded-lg">ഒഴിവാക്കുക X</button>
-                            </div>
+                        <div class="member-card bg-gray-50 p-5 rounded-xl border relative">
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">പേരും വീട്ടുപേരും:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg name" required></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ഫോൺ നമ്പർ:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg phone"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ബന്ധം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg relation"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ജനന തീയ്യതി:</label><input type="date" class="w-full bg-white border border-gray-300 p-2 rounded-lg dob"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">ജോലി:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg job"></div>
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-600 mb-1">സ്വദേശം / വിദേശം:</label>
-                                    <select class="w-full bg-white border border-gray-300 p-2 rounded-lg location"><option value="സ്വദേശം">സ്വദേശം</option><option value="വിദേശം">വിദേശം</option></select>
-                                </div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">മതം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg religion" value="ഇസ്ലാം"></div>
-                                <div><label class="block text-xs font-bold text-gray-600 mb-1">വിദ്യാഭ്യാസ യോഗ്യത:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg education"></div>
-                                <div>
-                                    <label class="block text-xs font-bold text-gray-600 mb-1">വൈവാഹിക സ്ഥിതി:</label>
-                                    <select class="w-full bg-white border border-gray-300 p-2 rounded-lg marital"><option value="അവിവാഹിതം">അവിവാഹിതം</option><option value="വിവാഹിതം">വിവാഹിതം</option></select>
-                                </div>
+                                <div><label class="block text-xs font-bold mb-1">പേര്:</label><input type="text" class="w-full bg-white border p-2 rounded-lg name" required></div>
+                                <div><label class="block text-xs font-bold mb-1">ഫോൺ:</label><input type="text" class="w-full bg-white border p-2 rounded-lg phone"></div>
+                                <div><label class="block text-xs font-bold mb-1">ബന്ധം:</label><input type="text" class="w-full bg-white border p-2 rounded-lg relation"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Submit Button -->
                 <div class="text-center pt-6 border-t">
-                    <button type="submit" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-lg transition w-full md:w-auto">✨ വിവരങ്ങൾ സേവ് ചെയ്യുക</button>
+                    <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg w-full md:w-auto">വിവരങ്ങൾ സേവ് ചെയ്യുക</button>
                 </div>
             </form>
         </div>
 
-        <!-- 2. ADMIN DASHBOARD SECTION -->
+        <!-- ADMIN TABLE SECTION -->
         <div id="sectionAdmin" class="hidden space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-emerald-50 p-4 rounded-xl border">
-                <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="🔍 വീട്ടുപേര് അല്ലെങ്കിൽ ഗൃഹനാഥൻ പേര് വെച്ച് തിരയുക..." class="w-full md:w-96 bg-white border border-gray-300 p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500">
-                <div class="text-sm font-bold text-emerald-900 bg-white px-4 py-2 rounded-lg border shadow-sm">ആകെ കുടുംബങ്ങൾ: <span id="totalCount" class="text-emerald-700">0</span></div>
-            </div>
-
-            <!-- Table View -->
             <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
-                <table class="min-w-full divide-y divide-gray-200 text-sm" id="adminTable">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-emerald-800 text-white text-xs">
                         <tr>
                             <th class="px-3 py-3 text-center">നമ്പർ</th>
                             <th class="px-3 py-3 text-left">ഗൃഹനാഥൻ</th>
                             <th class="px-3 py-3 text-left">വീട്ടുപേര്</th>
-                            <th class="px-3 py-3 text-center">വാർഡ് / വീട് നം</th>
-                            <th class="px-3 py-3 text-center">അംഗങ്ങളുടെ എണ്ണം</th>
                             <th class="px-3 py-3 text-center">പ്രവർത്തനങ്ങൾ</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200 text-gray-700" id="tableBody">
-                        <!-- Data will load here dynamically -->
-                    </tbody>
+                    <tbody class="divide-y divide-gray-200 text-gray-700" id="tableBody"></tbody>
                 </table>
             </div>
         </div>
-
     </div>
 
-    <!-- CUSTOM APP MODAL / POPUP -->
-    <div id="appModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl text-center transform transition-all scale-95 opacity-0" id="modalContainer">
-            <div id="modalIcon" class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">✨</div>
-            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-2">അറിയിപ്പ്</h3>
-            <p id="modalMessage" class="text-sm text-gray-600 mb-6">സന്ദേശം ഇവിടെ കാണ립니다.</p>
-            <div id="modalActions" class="flex justify-center gap-3">
-                <button id="modalPrimaryBtn" onclick="closeAppModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-xl text-sm font-bold shadow transition">ശരി</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- VIEW DETAILS MODAL -->
-    <div id="detailModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-lg font-bold text-emerald-900">കുടുംബത്തിന്റെ പൂർണ്ണ വിവരങ്ങൾ</h3>
-                <button onclick="closeDetailModal()" class="text-red-500 font-bold text-lg px-2">✕</button>
-            </div>
-            <div id="modalContent" class="space-y-4 text-sm">
-                <!-- Details injected here -->
-            </div>
-            <div class="text-right mt-6 pt-3 border-t">
-                <button onclick="closeDetailModal()" class="bg-gray-600 text-white px-5 py-2 rounded-lg text-sm font-bold">അടയ്ക്കുക</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Firebase & Dynamic Multi-Mahallu Logic Script -->
+    <!-- Script Logic -->
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyDzGRBflOY8-cNjECWGaPPOA-i4zrGfeIY",
@@ -194,281 +129,105 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        let currentMahalluId = "vilangampoyil";
-        let allSurveysData = {};
+        let currentMahalluKey = "";
 
-        // Change Mahallu Dynamically
-        function changeMahallu() {
-            const select = document.getElementById('globalMahalluSelect');
-            currentMahalluId = select.value;
-            const selectedText = select.options[select.selectedIndex].text;
-            
-            document.getElementById('currentMahalluTitle').innerText = selectedText;
-            document.getElementById('mahalluInputDisplay').value = selectedText;
+        // Login Handler with Expiry Check
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let email = document.getElementById('loginEmail').value.trim().replace('.', '_');
+            let password = document.getElementById('loginPassword').value;
 
-            // If admin tab is active, reload data for the newly selected mahallu
-            if(!document.getElementById('sectionAdmin').classList.contains('hidden')) {
-                loadAdminData();
-            }
-        }
+            database.ref('registered_mahallus/' + email).once('value').then(snapshot => {
+                let mahallu = snapshot.val();
+                if(mahallu && mahallu.password === password) {
+                    // Check Expiry Date
+                    let today = new Date().toISOString().split('T')[0];
+                    if(mahallu.expiryDate && mahallu.expiryDate < today) {
+                        alert('⚠️ നിങ്ങളുടെ സോഫ്റ്റ്‌വെയർ ആക്സസ് കാലാവധി അവസാനിച്ചിരിക്കുന്നു. ദയവായി പുതുക്കുക.');
+                        return;
+                    }
 
-        // Initialize default mahallu name on load
-        window.onload = function() {
-            changeMahallu();
-        };
-
-        // Custom App Popup Function
-        function showAppModal(title, message, isConfirm = false, onConfirm = null) {
-            const modal = document.getElementById('appModal');
-            const container = document.getElementById('modalContainer');
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalMessage').innerText = message;
-            
-            const actionsDiv = document.getElementById('modalActions');
-            if (isConfirm) {
-                actionsDiv.innerHTML = `
-                    <button onclick="closeAppModal()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-xl text-sm font-bold transition">വേണ്ട</button>
-                    <button id="modalConfirmBtn" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition">ഉവ്വ്</button>
-                `;
-                document.getElementById('modalConfirmBtn').onclick = function() {
-                    closeAppModal();
-                    if(onConfirm) onConfirm();
-                };
-            } else {
-                actionsDiv.innerHTML = `<button onclick="closeAppModal()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-xl text-sm font-bold shadow transition">ശരി</button>`;
-            }
-
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            setTimeout(() => {
-                container.classList.remove('scale-95', 'opacity-0');
-                container.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-
-        function closeAppModal() {
-            const modal = document.getElementById('appModal');
-            const container = document.getElementById('modalContainer');
-            container.classList.remove('scale-100', 'opacity-100');
-            container.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-            }, 150);
-        }
-
-        // Tab Switching Logic
-        function switchTab(tab) {
-            const formSec = document.getElementById('sectionForm');
-            const adminSec = document.getElementById('sectionAdmin');
-            const tabForm = document.getElementById('tabForm');
-            const tabAdmin = document.getElementById('tabAdmin');
-
-            if(tab === 'form') {
-                formSec.classList.remove('hidden');
-                adminSec.classList.add('hidden');
-                tabForm.className = "px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition";
-                tabAdmin.className = "px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition";
-            } else {
-                formSec.classList.add('hidden');
-                adminSec.classList.remove('hidden');
-                tabAdmin.className = "px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition";
-                tabForm.className = "px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition";
-                loadAdminData();
-            }
-        }
-
-        function updateSerialNumbers() {
-            const cards = document.querySelectorAll('.member-card');
-            cards.forEach((card, index) => {
-                card.querySelector('.sr-no').innerText = index + 1;
+                    currentMahalluKey = email;
+                    document.getElementById('loggedInMahalluName').innerText = mahallu.name;
+                    document.getElementById('expiryDateDisplay').innerText = mahallu.expiryDate || 'Unlimited';
+                    
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    document.getElementById('mainApp').classList.remove('hidden');
+                    loadAdminData();
+                } else {
+                    alert('തെറ്റായ ഇമെയിൽ അല്ലെങ്കിൽ പാസ്‌വേർഡ്!');
+                }
             });
+        });
+
+        function logout() {
+            location.reload();
+        }
+
+        function switchTab(tab) {
+            if(tab === 'form') {
+                document.getElementById('sectionForm').classList.remove('hidden');
+                document.getElementById('sectionAdmin').classList.add('hidden');
+            } else {
+                document.getElementById('sectionForm').classList.add('hidden');
+                document.getElementById('sectionAdmin').classList.remove('hidden');
+                loadAdminData();
+            }
         }
 
         function addRow() {
-            const container = document.getElementById('memberRows');
-            const cardCount = container.children.length + 1;
-            const newCard = document.createElement('div');
-            newCard.className = 'member-card bg-gray-50/80 p-5 rounded-xl border border-gray-200 shadow-sm relative';
-            newCard.innerHTML = `
-                <div class="flex justify-between items-center mb-3 border-b pb-2">
-                    <span class="bg-emerald-700 text-white text-xs font-bold px-2.5 py-1 rounded-full">അംഗം #<span class="sr-no">${cardCount}</span></span>
-                    <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700 text-xs font-bold bg-red-50 px-2.5 py-1 rounded-lg">ഒഴിവാക്കുക X</button>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">പേരും വീട്ടുപേരും:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg name" required></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ഫോൺ നമ്പർ:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg phone"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ബന്ധം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg relation"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ജനന തീയ്യതി:</label><input type="date" class="w-full bg-white border border-gray-300 p-2 rounded-lg dob"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">ജോലി:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg job"></div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">സ്വദേശം / വിദേശം:</label>
-                        <select class="w-full bg-white border border-gray-300 p-2 rounded-lg location"><option value="സ്വദേശം">സ്വദേശം</option><option value="വിദേശം">വിദേശം</option></select>
-                    </div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">മതം:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg religion" value="ഇസ്ലാം"></div>
-                    <div><label class="block text-xs font-bold text-gray-600 mb-1">വിദ്യാഭ്യാസ യോഗ്യത:</label><input type="text" class="w-full bg-white border border-gray-300 p-2 rounded-lg education"></div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-600 mb-1">വൈവാഹിക സ്ഥിതി:</label>
-                        <select class="w-full bg-white border border-gray-300 p-2 rounded-lg marital"><option value="അവിവാഹിതം">അവിവാഹിതം</option><option value="വിവാഹിതം">വിവാഹിതം</option></select>
-                    </div>
-                </div>
-            `;
-            container.appendChild(newCard);
-            updateSerialNumbers();
+            let container = document.getElementById('memberRows');
+            let div = document.createElement('div');
+            div.className = "member-card bg-gray-50 p-5 rounded-xl border relative";
+            div.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                <div><label class="block text-xs font-bold mb-1">പേര്:</label><input type="text" class="w-full bg-white border p-2 rounded-lg name" required></div>
+                <div><label class="block text-xs font-bold mb-1">ഫോൺ:</label><input type="text" class="w-full bg-white border p-2 rounded-lg phone"></div>
+                <div><label class="block text-xs font-bold mb-1">ബന്ധം:</label><input type="text" class="w-full bg-white border p-2 rounded-lg relation"></div>
+            </div>`;
+            container.appendChild(div);
         }
 
-        function removeRow(btn) {
-            const card = btn.closest('.member-card');
-            const container = document.getElementById('memberRows');
-            if (container.children.length > 1) {
-                card.remove();
-                updateSerialNumbers();
-            } else {
-                showAppModal('ശ്രദ്ധിക്കുക', 'കുറഞ്ഞത് ഒരു അംഗത്തിന്റെ വിവരമെങ്കിലും ഉണ്ടായിരിക്കണം!');
-            }
-        }
-
-        // Form Submit Handler (Saves to specific Mahallu path in Firebase)
         document.getElementById('mahalluForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const grihanathan = document.getElementById('grihanathan').value;
-            const veettuperu = document.getElementById('veettuperu').value;
-            const panchayat = document.getElementById('panchayat').value;
-            const wardNo = document.getElementById('wardNo').value;
-            const houseNo = document.getElementById('houseNo').value;
-            const mahallu = document.getElementById('mahalluInputDisplay').value;
+            let formData = {
+                grihanathan: document.getElementById('grihanathan').value,
+                veettuperu: document.getElementById('veettuperu').value,
+                panchayat: document.getElementById('panchayat').value,
+                wardNo: document.getElementById('wardNo').value,
+                houseNo: document.getElementById('houseNo').value
+            };
 
-            let members = [];
-            document.querySelectorAll('.member-card').forEach((card, index) => {
-                members.push({
-                    slNo: index + 1,
-                    name: card.querySelector('.name').value,
-                    phone: card.querySelector('.phone').value,
-                    relation: card.querySelector('.relation').value,
-                    dob: card.querySelector('.dob').value,
-                    job: card.querySelector('.job').value,
-                    location: card.querySelector('.location').value,
-                    religion: card.querySelector('.religion').value,
-                    education: card.querySelector('.education').value,
-                    marital: card.querySelector('.marital').value
-                });
+            database.ref(`mahallu_data/${currentMahalluKey}/surveys/` + Date.now()).set(formData).then(() => {
+                alert('വിജയകരമായി സേവ് ചെയ്തു!');
+                document.getElementById('mahalluForm').reset();
             });
-
-            const formData = { grihanathan, veettuperu, panchayat, wardNo, houseNo, mahallu, members, timestamp: new Date().toISOString() };
-
-            // Dynamic Path based on selected Mahallu ID
-            database.ref(`mahallu_data/${currentMahalluId}/surveys/` + Date.now()).set(formData)
-                .then(() => {
-                    showAppModal('വിജയം', 'വിവരങ്ങൾ വിജയകരമായി സേവ് ചെയ്തു!');
-                    document.getElementById('mahalluForm').reset();
-                    document.getElementById('memberRows').innerHTML = '';
-                    addRow();
-                    changeMahallu(); // Re-apply default field value
-                })
-                .catch((error) => showAppModal('പിശക്', 'Error: ' + error.message));
         });
 
-        // Load Admin Data from Specific Mahallu Path in Firebase
         function loadAdminData() {
-            database.ref(`mahallu_data/${currentMahalluId}/surveys`).on('value', (snapshot) => {
-                const data = snapshot.val();
-                allSurveysData = data || {};
-                const tbody = document.getElementById('tableBody');
+            database.ref(`mahallu_data/${currentMahalluKey}/surveys`).on('value', snapshot => {
+                let data = snapshot.val() || {};
+                let tbody = document.getElementById('tableBody');
                 tbody.innerHTML = '';
-                
-                let keys = Object.keys(allSurveysData);
-                document.getElementById('totalCount').innerText = keys.length;
-
+                let keys = Object.keys(data);
                 if(keys.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-500">ഈ മഹല്ലിൽ ഡാറ്റ ഒന്നും ലഭ്യമല്ല</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">ഡാറ്റ ഒന്നും ലഭ്യമല്ല</td></tr>`;
                     return;
                 }
-
                 keys.forEach((key, index) => {
-                    let item = allSurveysData[key];
-                    let tr = document.createElement('tr');
-                    tr.className = "hover:bg-gray-50 transition";
-                    tr.innerHTML = `
-                        <td class="px-3 py-3 text-center font-bold">${index + 1}</td>
-                        <td class="px-3 py-3 font-semibold text-emerald-900">${item.grihanathan}</td>
+                    let item = data[key];
+                    tbody.innerHTML += `<tr>
+                        <td class="px-3 py-3 text-center">${index + 1}</td>
+                        <td class="px-3 py-3 font-semibold">${item.grihanathan}</td>
                         <td class="px-3 py-3">${item.veettuperu}</td>
-                        <td class="px-3 py-3 text-center">വാർഡ്: ${item.wardNo || '-'} / വീട്: ${item.houseNo || '-'}</td>
-                        <td class="px-3 py-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full text-xs font-bold">${item.members ? item.members.length : 0} പേർ</span></td>
-                        <td class="px-3 py-3 text-center space-x-2">
-                            <button onclick="viewDetails('${key}')" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-bold">വിവരം</button>
-                            <button onclick="confirmDelete('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">ഡിലീറ്റ്</button>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
+                        <td class="px-3 py-3 text-center"><button onclick="deleteData('${key}')" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">ഡിലീറ്റ്</button></td>
+                    </tr>`;
                 });
             });
         }
 
-        // View Details Modal
-        function viewDetails(key) {
-            let item = allSurveysData[key];
-            if(!item) return;
-
-            let html = `
-                <div class="bg-emerald-50 p-4 rounded-xl border mb-4">
-                    <p><strong>ഗൃഹനാഥൻ:</strong> ${item.grihanathan}</p>
-                    <p><strong>വീട്ടുപേര്:</strong> ${item.veettuperu}</p>
-                    <p><strong>പഞ്ചായത്ത് / വാർഡ് / വീട് നമ്പർ:</strong> ${item.panchayat || '-'} / ${item.wardNo || '-'} / ${item.houseNo || '-'}</p>
-                </div>
-                <h4 class="font-bold text-gray-800 mb-2">കുടുംബാംഗങ്ങളുടെ പട്ടിക:</h4>
-                <div class="space-y-3">
-            `;
-
-            if(item.members && item.members.length > 0) {
-                item.members.forEach((m, idx) => {
-                    html += `
-                        <div class="bg-gray-50 p-3 rounded-lg border text-xs space-y-1">
-                            <p class="font-bold text-emerald-800">അംഗം #${idx + 1}: ${m.name}</p>
-                            <p>ബന്ധം: ${m.relation || '-'} | ഫോൺ: ${m.phone || '-'} | തീയ്യതി: ${m.dob || '-'}</p>
-                            <p>ജോലി: ${m.job || '-'} (${m.location || '-'}) | വിദ്യാഭ്യാസം: ${m.education || '-'} | വൈവാഹിക സ്ഥിതി: ${m.marital || '-'}</p>
-                        </div>
-                    `;
-                });
-            } else {
-                html += `<p class="text-gray-500 text-xs">അംഗങ്ങളുടെ വിവരങ്ങൾ ലഭ്യമല്ല.</p>`;
-            }
-
-            html += `</div>`;
-            document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('detailModal').classList.remove('hidden');
-            document.getElementById('detailModal').classList.add('flex');
-        }
-
-        function closeDetailModal() {
-            document.getElementById('detailModal').classList.remove('flex');
-            document.getElementById('detailModal').classList.add('hidden');
-        }
-
-        // Delete Confirmation with Custom Modal
-        function confirmDelete(key) {
-            showAppModal('ഉറപ്പാണോ?', 'ഈ വിവരങ്ങൾ തീർച്ചയായും ഡിലീറ്റ് ചെയ്യണമെന്നുണ്ടോ?', true, function() {
-                database.ref(`mahallu_data/${currentMahalluId}/surveys/` + key).remove()
-                    .then(() => showAppModal('വിജയം', 'വിജയകരമായി ഡിലീറ്റ് ചെയ്തു!'))
-                    .catch(err => showAppModal('പിശക്', 'Error: ' + err.message));
-            });
-        }
-
-        // Search/Filter Function
-        function filterTable() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let rows = document.getElementById('tableBody').getElementsByTagName('tr');
-            for (let i = 0; i < rows.length; i++) {
-                let tdName = rows[i].getElementsByTagName('td')[1];
-                let tdHouse = rows[i].getElementsByTagName('td')[2];
-                if (tdName || tdHouse) {
-                    let nameValue = tdName.textContent || tdName.innerText;
-                    let houseValue = tdHouse.textContent || tdHouse.innerText;
-                    if (nameValue.toLowerCase().indexOf(input) > -1 || houseValue.toLowerCase().indexOf(input) > -1) {
-                        rows[i].style.display = "";
-                    } else {
-                        rows[i].style.display = "none";
-                    }
-                }
+        function deleteData(key) {
+            if(confirm('ഡിലീറ്റ് ചെയ്യണമെന്നുറപ്പാണോ?')) {
+                database.ref(`mahallu_data/${currentMahalluKey}/surveys/` + key).remove();
             }
         }
     </script>
