@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>കേരള മഹല്ല് മാനേജ്മെന്റ് സിസ്റ്റം (SaaS)</title>
+    <title>Keralam Mahallu Management System</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font (Manjari for Malayalam) -->
@@ -17,72 +17,100 @@
 </head>
 <body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 p-4 md:p-8 min-h-screen">
 
-    <!-- 1. LOGIN SCREEN -->
-    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20">
+    <!-- 1. LOGIN SCREEN WITH REGISTER OPTION -->
+    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-10">
         <div class="text-center mb-6">
-            <h2 class="text-2xl font-bold text-emerald-900">🕌 മഹല്ല് സോഫ്റ്റ്‌വെയർ ലോഗിൻ</h2>
-            <p class="text-xs text-gray-600 mt-1">യൂസർനെയിമും പാസ്‌വേർഡും നൽകി പ്രവേശിക്കുക</p>
+            <h2 class="text-2xl font-bold text-emerald-900">Mahallu Software Login</h2>
+            <p class="text-xs text-gray-600 mt-1">Username-um password-um nalki pravesikkuka</p>
         </div>
         <form id="loginForm" class="space-y-4">
             <div>
-                <label class="block text-xs font-bold text-gray-700 mb-1">യൂസർനെയിം / ഇമെയിൽ:</label>
-                <input type="text" id="loginUsername" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="sadmin അല്ലെങ്കിൽ email">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Username / Email:</label>
+                <input type="text" id="loginUsername" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="sadmin allengil email">
             </div>
             <div>
-                <label class="block text-xs font-bold text-gray-700 mb-1">പാസ്‌വേർഡ്:</label>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Password:</label>
                 <input type="password" id="loginPassword" required class="w-full border p-2.5 rounded-lg text-sm outline-none focus:ring-2 focus:ring-emerald-500" placeholder="********">
             </div>
-            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl shadow transition">ലോഗിൻ ചെയ്യുക</button>
+            <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-xl shadow transition">Login Cheyyuka</button>
         </form>
+
+        <div class="mt-6 text-center border-t pt-4">
+            <p class="text-xs text-gray-600">Puthiya Mahallu anoo?</p>
+            <button onclick="toggleRegisterForm()" class="text-emerald-700 font-bold text-xs mt-1 hover:underline">Ivide Click Cheythu Register Cheyyuka</button>
+        </div>
     </div>
 
-    <!-- 2. SUPER ADMIN DASHBOARD (Visible only for sadmin) -->
+    <!-- REGISTER MODAL / FORM -->
+    <div id="registerScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-10 hidden">
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-emerald-900">Puthiya Mahallu Registration</h2>
+            <p class="text-xs text-gray-600 mt-1">Vivarangal nalki Super Admin approval-kayi send cheyyuka</p>
+        </div>
+        <form id="registerForm" class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Mahallinte Peru:</label>
+                <input type="text" id="regMahalluName" required class="w-full border p-2.5 rounded-lg text-sm" placeholder="Mahallinte peru">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Email ID:</label>
+                <input type="email" id="regEmail" required class="w-full border p-2.5 rounded-lg text-sm" placeholder="mahallu@gmail.com">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Password:</label>
+                <input type="password" id="regPassword" required class="w-full border p-2.5 rounded-lg text-sm" placeholder="********">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow transition">Register Request Anaykkuka</button>
+        </form>
+        <div class="mt-6 text-center border-t pt-4">
+            <button onclick="toggleRegisterForm()" class="text-gray-600 font-bold text-xs hover:underline">Back to Login</button>
+        </div>
+    </div>
+
+    <!-- 2. SUPER ADMIN DASHBOARD -->
     <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
         <div class="bg-indigo-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
             <div>
-                <h2 class="text-lg font-bold">👑 സൂപ്പർ അഡ്മിൻ പാനൽ</h2>
-                <p class="text-xs text-indigo-200">മഹല്ലുകളുടെ രജിസ്ട്രേഷനും അപ്രൂവലുകളും നിയന്ത്രിക്കുക</p>
+                <h2 class="text-lg font-bold">Super Admin Panel</h2>
+                <p class="text-xs text-indigo-200">Mahallukalude registrations and approvals niyanthrikkuka</p>
             </div>
-            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">ലോഗ് ഔട്ട്</button>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">Log Out</button>
         </div>
 
         <div class="space-y-6">
-            <h3 class="text-md font-bold text-gray-800">അപ്രൂവൽ കാത്തിരിക്കുന്ന മഹല്ലുകൾ</h3>
+            <h3 class="text-md font-bold text-gray-800">Approval Kaathirikkunna Mahallukal</h3>
             <div class="overflow-x-auto bg-white rounded-xl border shadow-sm">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-indigo-800 text-white text-xs">
                         <tr>
-                            <th class="px-3 py-3 text-center">നമ്പർ</th>
-                            <th class="px-3 py-3 text-left">മഹല്ലിന്റെ പേര്</th>
-                            <th class="px-3 py-3 text-left">ഇമെയിൽ</th>
-                            <th class="px-3 py-3 text-center">കാലാവധി (Expiry)</th>
-                            <th class="px-3 py-3 text-center">സ്റ്റാറ്റസ്</th>
-                            <th class="px-3 py-3 text-center">നടപടികൾ</th>
+                            <th class="px-3 py-3 text-center">Number</th>
+                            <th class="px-3 py-3 text-left">Mahallinte Peru</th>
+                            <th class="px-3 py-3 text-left">Email</th>
+                            <th class="px-3 py-3 text-center">Status</th>
+                            <th class="px-3 py-3 text-center">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-200 text-gray-700" id="approvalTableBody">
-                        <!-- Dynamic Approval List -->
-                    </tbody>
+                    <tbody class="divide-y divide-gray-200 text-gray-700" id="approvalTableBody"></tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <!-- 3. NORMAL MAHALLU APP DASHBOARD (Hidden until logged in as mahallu) -->
+    <!-- 3. NORMAL MAHALLU APP DASHBOARD -->
     <div id="mainApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 hidden">
         <div class="bg-emerald-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
             <div>
-                <h2 id="loggedInMahalluName" class="text-lg font-bold">മഹല്ല് പേര്</h2>
-                <p class="text-xs text-emerald-200">കാലാവധി: <span id="expiryDateDisplay" class="font-bold text-yellow-300">-</span></p>
+                <h2 id="loggedInMahalluName" class="text-lg font-bold">Mahallu Peru</h2>
+                <p class="text-xs text-emerald-200">Status: <span class="font-bold text-yellow-300">Active</span></p>
             </div>
-            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">ലോഗ് ഔട്ട്</button>
+            <button onclick="logout()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-bold px-4 py-2 rounded-lg transition">Log Out</button>
         </div>
 
         <div class="flex justify-between items-center mb-8 border-b pb-4">
-            <h1 class="text-2xl font-bold text-emerald-900">സ്ഥിതി വിവര കണക്ക് & സർവ്വെ</h1>
+            <h1 class="text-2xl font-bold text-emerald-900">Sthithi Vivara Kanakku & Survey</h1>
             <div class="flex gap-2 bg-emerald-100 p-1 rounded-xl">
-                <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">സർവ്വെ ഫോം</button>
-                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">ഡാഷ്‌ബോർഡ്</button>
+                <button onclick="switchTab('form')" id="tabForm" class="px-4 py-2 rounded-lg text-sm font-bold bg-emerald-700 text-white shadow transition">Survey Form</button>
+                <button onclick="switchTab('admin')" id="tabAdmin" class="px-4 py-2 rounded-lg text-sm font-bold text-emerald-800 hover:bg-emerald-200 transition">Dashboard</button>
             </div>
         </div>
 
@@ -90,17 +118,17 @@
         <div id="sectionForm">
             <form id="mahalluForm" class="space-y-6">
                 <div class="bg-emerald-50/60 p-6 rounded-xl border border-emerald-200/60 shadow-sm">
-                    <h2 class="text-md font-bold text-emerald-800 mb-4">🏠 ഗൃഹ വിവരങ്ങൾ</h2>
+                    <h2 class="text-md font-bold text-emerald-800 mb-4">Griha Vivarangal</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">ഗൃഹനാഥൻ്റെ പേര്:</label><input type="text" id="grihanathan" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">വീട്ടുപേര്:</label><input type="text" id="veettuperu" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">പഞ്ചായത്ത്:</label><input type="text" id="panchayat" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">വാർഡ് നമ്പർ:</label><input type="text" id="wardNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
-                        <div><label class="block text-xs font-bold text-gray-700 mb-1">വീട് നമ്പർ:</label><input type="text" id="houseNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Grihanathante Peru:</label><input type="text" id="grihanathan" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Veettuperu:</label><input type="text" id="veettuperu" required class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Panchayat:</label><input type="text" id="panchayat" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">Ward Number:</label><input type="text" id="wardNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
+                        <div><label class="block text-xs font-bold text-gray-700 mb-1">House Number:</label><input type="text" id="houseNo" class="w-full bg-white border p-2.5 rounded-lg text-sm"></div>
                     </div>
                 </div>
                 <div class="text-center pt-6 border-t">
-                    <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg w-full md:w-auto">വിവരങ്ങൾ സേവ് ചെയ്യുക</button>
+                    <button type="submit" class="bg-emerald-600 text-white font-bold px-8 py-3 rounded-xl shadow-lg w-full md:w-auto">Vivarangal Save Cheyyuka</button>
                 </div>
             </form>
         </div>
@@ -111,10 +139,10 @@
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-emerald-800 text-white text-xs">
                         <tr>
-                            <th class="px-3 py-3 text-center">നമ്പർ</th>
-                            <th class="px-3 py-3 text-left">ഗൃഹനാഥൻ</th>
-                            <th class="px-3 py-3 text-left">വീട്ടുപേര്</th>
-                            <th class="px-3 py-3 text-center">പ്രവർത്തനങ്ങൾ</th>
+                            <th class="px-3 py-3 text-center">Number</th>
+                            <th class="px-3 py-3 text-left">Grihanathan</th>
+                            <th class="px-3 py-3 text-left">Veettuperu</th>
+                            <th class="px-3 py-3 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200 text-gray-700" id="tableBody"></tbody>
@@ -139,13 +167,42 @@
         const database = firebase.database();
         let currentMahalluKey = "";
 
+        function toggleRegisterForm() {
+            document.getElementById('loginScreen').classList.toggle('hidden');
+            document.getElementById('registerScreen').classList.toggle('hidden');
+        }
+
+        // New Mahallu Registration Request
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let name = document.getElementById('regMahalluName').value;
+            let email = document.getElementById('regEmail').value.trim();
+            let password = document.getElementById('regPassword').value;
+            let emailKey = email.replace('.', '_');
+
+            let regData = {
+                name: name,
+                email: email,
+                password: password,
+                status: "Pending",
+                expiryDate: "2027-12-31"
+            };
+
+            database.ref('registered_mahallus/' + emailKey).set(regData).then(() => {
+                alert('Registration request vijayakaramayi send cheythu! Super admin approve cheythal login cheyyam.');
+                document.getElementById('registerForm').reset();
+                toggleRegisterForm();
+            }).catch(err => {
+                alert('Error: ' + err.message);
+            });
+        });
+
         // Login Handler
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let username = document.getElementById('loginUsername').value.trim();
             let password = document.getElementById('loginPassword').value;
 
-            // Check Super Admin Login
             if(username === "sadmin" && password === "admin123") {
                 document.getElementById('loginScreen').classList.add('hidden');
                 document.getElementById('superAdminApp').classList.remove('hidden');
@@ -153,30 +210,22 @@
                 return;
             }
 
-            // Check Normal Mahallu Login
             let emailKey = username.replace('.', '_');
             database.ref('registered_mahallus/' + emailKey).once('value').then(snapshot => {
                 let mahallu = snapshot.val();
                 if(mahallu && mahallu.password === password) {
                     if(mahallu.status !== "Approved") {
-                        alert('⚠️ നിങ്ങളുടെ അക്കൗണ്ട് സൂപ്പർ അഡ്മിൻ ഇതുവരെ അപ്രൂവ് ചെയ്തിട്ടില്ല.');
+                        alert('Nningshude account super admin ithuvare approve cheythittilla.');
                         return;
                     }
-                    let today = new Date().toISOString().split('T')[0];
-                    if(mahallu.expiryDate && mahallu.expiryDate < today) {
-                        alert('⚠️️ നിങ്ങളുടെ സോഫ്റ്റ്‌വെയർ ആക്സസ് കാലാവധി അവസാനിച്ചിരിക്കുന്നു.');
-                        return;
-                    }
-
                     currentMahalluKey = emailKey;
                     document.getElementById('loggedInMahalluName').innerText = mahallu.name;
-                    document.getElementById('expiryDateDisplay').innerText = mahallu.expiryDate || 'Unlimited';
                     
                     document.getElementById('loginScreen').classList.add('hidden');
                     document.getElementById('mainApp').classList.remove('hidden');
                     loadAdminData();
                 } else {
-                    alert('തെറ്റായ യൂസർനെയിം അല്ലെങ്കിൽ പാസ്‌വേർഡ്!');
+                    alert('Thettaya username allengil password!');
                 }
             });
         });
@@ -185,7 +234,6 @@
             location.reload();
         }
 
-        // Super Admin Approval Functions
         function loadSuperAdminApprovals() {
             database.ref('registered_mahallus').on('value', snapshot => {
                 let data = snapshot.val() || {};
@@ -194,7 +242,7 @@
                 let keys = Object.keys(data);
                 
                 if(keys.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-gray-500">രജിസ്ട്രേഷനുകൾ ഒന്നും ലഭ്യമല്ല</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-500">Registrations onnum labhyamalla</td></tr>`;
                     return;
                 }
 
@@ -208,11 +256,10 @@
                         <td class="px-3 py-3 text-center">${index + 1}</td>
                         <td class="px-3 py-3 font-semibold">${item.name}</td>
                         <td class="px-3 py-3">${item.email || key.replace('_', '.')}</td>
-                        <td class="px-3 py-3 text-center">${item.expiryDate || 'N/A'}</td>
                         <td class="px-3 py-3 text-center">${statusBadge}</td>
                         <td class="px-3 py-3 text-center space-x-2">
-                            <button onclick="approveMahallu('${key}')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">അപ്രൂവ് ചെയ്യുക</button>
-                            <button onclick="rejectMahallu('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">നിരസിക്കുക</button>
+                            <button onclick="approveMahallu('${key}')" class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-xs font-bold">Approve</button>
+                            <button onclick="rejectMahallu('${key}')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-bold">Reject</button>
                         </td>
                     </tr>`;
                 });
@@ -221,19 +268,18 @@
 
         function approveMahallu(key) {
             database.ref(`registered_mahallus/${key}`).update({ status: "Approved" }).then(() => {
-                alert('മഹല്ല് വിജയകരമായി അപ്രൂവ് ചെയ്തു!');
+                alert('Mahallu vijayakaramayi approve cheythu!');
             });
         }
 
         function rejectMahallu(key) {
-            if(confirm('ഈ മഹല്ല് നിരസിക്കണമെന്നുറപ്പാണോ?')) {
+            if(confirm('Ee mahallu reject cheyyanamennundo?')) {
                 database.ref(`registered_mahallus/${key}`).remove().then(() => {
-                    alert('ഡിലീറ്റ് ചെയ്തു!');
+                    alert('Delete cheythu!');
                 });
             }
         }
 
-        // Normal Mahallu Tabs & Functions
         function switchTab(tab) {
             if(tab === 'form') {
                 document.getElementById('sectionForm').classList.remove('hidden');
@@ -256,7 +302,7 @@
             };
 
             database.ref(`mahallu_data/${currentMahalluKey}/surveys/` + Date.now()).set(formData).then(() => {
-                alert('വിജയകരമായി സേവ് ചെയ്തു!');
+                alert('Vivarangal vijayakaramayi save cheythu!');
                 document.getElementById('mahalluForm').reset();
             });
         });
@@ -268,7 +314,7 @@
                 tbody.innerHTML = '';
                 let keys = Object.keys(data);
                 if(keys.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">ഡാറ്റ ഒന്നും ലഭ്യമല്ല</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-gray-500">Data onnum labhyamalla</td></tr>`;
                     return;
                 }
                 keys.forEach((key, index) => {
@@ -277,14 +323,14 @@
                         <td class="px-3 py-3 text-center">${index + 1}</td>
                         <td class="px-3 py-3 font-semibold">${item.grihanathan}</td>
                         <td class="px-3 py-3">${item.veettuperu}</td>
-                        <td class="px-3 py-3 text-center"><button onclick="deleteData('${key}')" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">ഡിലീറ്റ്</button></td>
+                        <td class="px-3 py-3 text-center"><button onclick="deleteData('${key}')" class="bg-red-600 text-white px-3 py-1 rounded text-xs font-bold">Delete</button></td>
                     </tr>`;
                 });
             });
         }
 
         function deleteData(key) {
-            if(confirm('ഡിലീറ്റ് ചെയ്യണമെന്നുറപ്പാണോ?')) {
+            if(confirm('Delete cheyyanamennurappano?')) {
                 database.ref(`mahallu_data/${currentMahalluKey}/surveys/` + key).remove();
             }
         }
