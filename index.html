@@ -16,7 +16,7 @@
 <body class="bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 min-h-screen">
 
     <!-- LOGIN SCREEN -->
-    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20">
+    <div id="loginScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20 mx-4 md:mx-auto">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-emerald-900">Mahallu Software Login</h2>
             <p class="text-xs text-gray-600 mt-1">Enter your username and password</p>
@@ -38,7 +38,7 @@
     </div>
 
     <!-- REGISTER FORM -->
-    <div id="registerScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20 hidden">
+    <div id="registerScreen" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-2xl border border-emerald-100 mt-20 mx-4 md:mx-auto hidden">
         <div class="text-center mb-6">
             <h2 class="text-2xl font-bold text-emerald-900">New Mahallu Registration</h2>
             <p class="text-xs text-gray-600 mt-1">Submit your details for Super Admin approval</p>
@@ -64,7 +64,7 @@
     </div>
 
     <!-- SUPER ADMIN DASHBOARD -->
-    <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 mt-10 hidden">
+    <div id="superAdminApp" class="max-w-6xl mx-auto bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-2xl border border-emerald-100 mt-10 mx-4 md:mx-auto hidden">
         <div class="bg-indigo-900 text-white p-4 rounded-xl mb-6 flex justify-between items-center shadow-md">
             <h2 class="text-lg font-bold">Super Admin Panel</h2>
             <button onclick="logout()" class="bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg">Log Out</button>
@@ -94,10 +94,11 @@
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center">
                         <div class="flex-shrink-0 cursor-pointer" onclick="switchTab('homeSection')">
-                            <span id="loggedInMahalluName" class="font-bold text-xl uppercase tracking-wider text-emerald-100">Institution Name</span>
+                            <span id="loggedInMahalluName" class="font-bold text-lg md:text-xl uppercase tracking-wider text-emerald-100">Institution Name</span>
                         </div>
                         
-                        <div class="hidden md:block">
+                        <!-- Desktop Menu -->
+                        <div class="hidden lg:block">
                             <div class="ml-10 flex items-baseline space-x-2 text-sm font-medium">
                                 <button onclick="switchTab('homeSection')" class="hover:bg-emerald-700 px-3 py-2 rounded-md transition">Home</button>
                                 
@@ -126,9 +127,40 @@
                         </div>
                     </div>
                     
-                    <div>
-                        <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition shadow">Log Out</button>
+                    <!-- Right Side Buttons -->
+                    <div class="flex items-center gap-3">
+                        <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold px-3 py-2 md:px-4 md:py-2 rounded-lg transition shadow">Log Out</button>
+                        
+                        <!-- Mobile menu button -->
+                        <div class="lg:hidden flex items-center">
+                            <button onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-emerald-200 hover:text-white hover:bg-emerald-700 focus:outline-none">
+                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu (Hidden by default) -->
+            <div id="mobileMenu" class="hidden lg:hidden bg-emerald-900 border-t border-emerald-700">
+                <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <button onclick="switchTab('homeSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Home</button>
+                    
+                    <!-- Mobile Mahallu Submenu -->
+                    <div class="text-emerald-300 font-bold px-3 py-2 text-sm uppercase tracking-wider">Mahallu</div>
+                    <button onclick="switchTab('householdSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block pl-6 pr-3 py-2 rounded-md text-sm font-medium w-full text-left">വീടുകൾ (Houses)</button>
+                    <button onclick="toggleMobileMenu()" class="text-white hover:bg-emerald-700 block pl-6 pr-3 py-2 rounded-md text-sm font-medium w-full text-left">ഭാരവാഹികൾ (Office Bearers)</button>
+                    <button onclick="toggleMobileMenu()" class="text-white hover:bg-emerald-700 block pl-6 pr-3 py-2 rounded-md text-sm font-medium w-full text-left">വാർഡുകൾ (Wards)</button>
+                    
+                    <!-- Other Links -->
+                    <button onclick="switchTab('madrasaSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left mt-2">Madrasa</button>
+                    <button onclick="switchTab('alumniSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Alumni</button>
+                    <button onclick="switchTab('aboutSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left">About Us</button>
+                    <button onclick="switchTab('contactSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Contacts</button>
+                    <button onclick="switchTab('linksSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Useful Links</button>
+                    <button onclick="switchTab('formsSection'); toggleMobileMenu()" class="text-white hover:bg-emerald-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left">Application Forms</button>
                 </div>
             </div>
         </nav>
@@ -136,15 +168,15 @@
         <!-- Content Sections -->
         <div class="max-w-7xl mx-auto p-4 md:p-8 mt-4">
 
-            <!-- 1. HOME SECTION (With Mahallu / Mosque Image) -->
-            <div id="homeSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-150 text-center">
-                <h1 class="text-3xl font-bold text-emerald-900 mb-2">സ്വാഗതം! Welcome to Mahallu Portal</h1>
-                <p class="text-gray-600 mb-6">നിങ്ങളുടെ മഹല്ല് ഡിജിറ്റൽ മാനേജ്മെന്റ് സിസ്റ്റത്തിലേക്ക് സ്വാഗതം.</p>
+            <!-- 1. HOME SECTION -->
+            <div id="homeSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 text-center">
+                <h1 class="text-2xl md:text-3xl font-bold text-emerald-900 mb-2">സ്വാഗതം! Welcome to Mahallu Portal</h1>
+                <p class="text-gray-600 mb-6 text-sm md:text-base">നിങ്ങളുടെ മഹല്ല് ഡിജിറ്റൽ മാനേജ്മെന്റ് സിസ്റ്റത്തിലേക്ക് സ്വാഗതം.</p>
                 <div class="max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg border border-emerald-100">
-                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Mahallu Mosque" class="w-full h-72 object-cover">
+                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=800&q=80" alt="Mahallu Mosque" class="w-full h-48 md:h-72 object-cover">
                 </div>
                 <div class="mt-6">
-                    <button onclick="switchTab('householdSection')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-2.5 rounded-xl shadow transition">വീടുകളുടെ വിവരങ്ങൾ ചേർക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</button>
+                    <button onclick="switchTab('householdSection')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 md:px-6 py-2.5 rounded-xl shadow transition text-sm md:text-base">വീടുകളുടെ വിവരങ്ങൾ ചേർക്കാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക</button>
                 </div>
             </div>
 
@@ -152,8 +184,8 @@
             <div id="householdSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-4">Mahallu Household Details</h2>
                 <form id="mahalluForm" class="space-y-6">
-                    <div class="bg-emerald-50 p-6 rounded-xl border border-emerald-100">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-emerald-50 p-4 md:p-6 rounded-xl border border-emerald-100">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-gray-600 mb-1">Grihanathan Name</label>
                                 <input type="text" id="grihanathan" required class="w-full border border-gray-300 p-2.5 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 outline-none">
@@ -168,44 +200,34 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition">Save Details</button>
+                    <button type="submit" class="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-8 py-3 rounded-xl shadow-md transition">Save Details</button>
                 </form>
             </div>
 
-            <!-- 3. MADRASA SECTION -->
+            <!-- Other Sections -->
             <div id="madrasaSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-2">Madrasa Management</h2>
-                <p class="text-gray-600">മദ്രസ വിദ്യാർത്ഥികളുടെ വിവരങ്ങളും ക്ലാസുകളും ഇവിടെ കൈകാര്യം ചെയ്യാം.</p>
+                <p class="text-gray-600 text-sm md:text-base">മദ്രസ വിദ്യാർത്ഥികളുടെ വിവരങ്ങളും ക്ലാസുകളും ഇവിടെ കൈകാര്യം ചെയ്യാം.</p>
             </div>
-
-            <!-- 4. ALUMNI SECTION -->
             <div id="alumniSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-2">Alumni Portal</h2>
-                <p class="text-gray-600">പൂർവ്വ വിദ്യാർത്ഥി സംഗമങ്ങളും വിവരങ്ങളും.</p>
+                <p class="text-gray-600 text-sm md:text-base">പൂർവ്വ വിദ്യാർത്ഥി സംഗമങ്ങളും വിവരങ്ങളും.</p>
             </div>
-
-            <!-- 5. ABOUT US SECTION -->
             <div id="aboutSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-2">About Us</h2>
-                <p class="text-gray-600">മഹല്ല് കമ്മിറ്റിയെക്കുറിച്ചുള്ള വിശദവിവരങ്ങൾ.</p>
+                <p class="text-gray-600 text-sm md:text-base">മഹല്ല് കമ്മിറ്റിയെക്കുറിച്ചുള്ള വിശദവിവരങ്ങൾ.</p>
             </div>
-
-            <!-- 6. CONTACTS SECTION -->
             <div id="contactSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-2">Contacts</h2>
-                <p class="text-gray-600">ഭാരവാഹികളുടെ ഫോൺ നമ്പറുകളും മറ്റ് കോൺടാക്റ്റ് വിവരങ്ങളും.</p>
+                <p class="text-gray-600 text-sm md:text-base">ഭാരവാഹികളുടെ ഫോൺ നമ്പറുകളും മറ്റ് കോൺടാക്റ്റ് വിവരങ്ങളും.</p>
             </div>
-
-            <!-- 7. USEFUL LINKS SECTION -->
             <div id="linksSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-2">Useful Links</h2>
-                <p class="text-gray-600">പ്രധാനപ്പെട്ട ഔദ്യോഗിക ലിങ്കുകൾ.</p>
+                <p class="text-gray-600 text-sm md:text-base">പ്രധാനപ്പെട്ട ഔദ്യോഗിക ലിങ്കുകൾ.</p>
             </div>
-
-            <!-- 8. APPLICATION FORMS SECTION -->
             <div id="formsSection" class="content-section bg-white/90 backdrop-blur-md p-6 md:p-10 rounded-2xl shadow-xl border border-emerald-100 hidden">
                 <h2 class="text-xl font-bold text-emerald-900 mb-2">Application Forms</h2>
-                <p class="text-gray-600">സർട്ടിഫിക്കറ്റുകൾക്കും മറ്റ് ആവശ്യങ്ങൾക്കുമുള്ള അപേക്ഷാ ഫോമുകൾ.</p>
+                <p class="text-gray-600 text-sm md:text-base">സർട്ടിഫിക്കറ്റുകൾക്കും മറ്റ് ആവശ്യങ്ങൾക്കുമുള്ള അപേക്ഷാ ഫോമുകൾ.</p>
             </div>
 
         </div>
@@ -227,11 +249,18 @@
         const database = firebase.database();
         let currentMahalluKey = "";
 
+        // Mobile Menu Toggle Function
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
         // Tab Switching Function
         function switchTab(sectionId) {
             let sections = document.querySelectorAll('.content-section');
             sections.forEach(sec => sec.classList.add('hidden'));
             document.getElementById(sectionId).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleRegisterForm() {
@@ -289,7 +318,7 @@
                     document.getElementById('loggedInMahalluName').innerText = mahallu.name;
                     document.getElementById('loginScreen').classList.add('hidden');
                     document.getElementById('mainApp').classList.remove('hidden');
-                    switchTab('homeSection'); // Show Home Section by default upon login
+                    switchTab('homeSection');
                 } else {
                     alert('Invalid username or password!');
                 }
